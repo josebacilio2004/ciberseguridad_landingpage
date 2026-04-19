@@ -24,7 +24,6 @@
 
         /* --- Animations --- */
         @keyframes slideUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
-        @keyframes glow { 0%, 100% { filter: drop-shadow(0 0 5px var(--primary)); } 50% { filter: drop-shadow(0 0 15px var(--primary)); } }
 
         /* --- Header / Hero --- */
         header {
@@ -96,19 +95,13 @@
         .tool-link span { font-size: 0.8rem; color: var(--text-dim); }
 
         /* --- Content Sections --- */
-        .section-header { margin-bottom: 3rem; }
-        .section-header h2 { font-size: 2.2rem; margin-bottom: 1rem; }
-        
         .content-card {
             background: var(--surface);
             padding: 3rem;
             border-radius: 32px;
             border: 1px solid var(--border);
             margin-bottom: 4rem;
-            transition: border-color 0.4s;
         }
-
-        .content-card:hover { border-color: rgba(255,255,255,0.15); }
 
         .info-grid {
             display: grid;
@@ -119,16 +112,30 @@
         .info-item h3 { color: var(--secondary); margin-bottom: 1rem; font-size: 1.4rem; }
         .info-item p { color: var(--text-dim); font-size: 0.95rem; }
 
-        /* --- Checklist --- */
-        .checklist { list-style: none; margin-top: 2rem; }
-        .checklist li {
-            padding: 0.8rem 0;
-            border-bottom: 1px solid var(--border);
-            display: flex;
-            align-items: center;
-            gap: 1rem;
+        /* --- Compliance / Standards Section --- */
+        .standards-banner {
+            background: linear-gradient(90deg, #1e3a8a 0%, #0f172a 100%);
+            padding: 4rem 3rem;
+            border-radius: 40px;
+            margin: 6rem 0;
+            border: 1px solid rgba(255,255,255,0.1);
         }
-        .checklist li::before { content: "✓"; color: var(--secondary); font-weight: 800; }
+
+        .standards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .standard-box {
+            background: rgba(255,255,255,0.03);
+            padding: 2rem;
+            border-radius: 20px;
+            border: 1px solid rgba(255,255,255,0.05);
+        }
+
+        .standard-box h4 { color: var(--primary); margin-bottom: 0.5rem; }
 
         /* --- Case Study --- */
         .case-study {
@@ -138,7 +145,6 @@
             border-left: 6px solid var(--accent);
         }
 
-        .mule-list { margin-top: 2rem; }
         .mule-item {
             background: rgba(255,255,255,0.02);
             padding: 1.2rem;
@@ -155,13 +161,11 @@
             text-align: center;
             border-top: 1px solid var(--border);
             color: var(--text-dim);
-            font-size: 0.9rem;
         }
 
-        /* --- Responsive --- */
         @media (max-width: 768px) {
             h1 { font-size: 2.5rem; }
-            .content-card { padding: 1.5rem; }
+            .content-card, .standards-banner { padding: 1.5rem; }
         }
     </style>
 </head>
@@ -169,26 +173,26 @@
 
     <header>
         <div class="container" style="animation: slideUp 0.8s ease-out;">
-            <div class="badge">Estrategia de Defensa Activa</div>
+            <div class="badge">Estrategia de Inteligencia & Gestión de Riesgos</div>
             <h1>Defensa Digital</h1>
-            <p class="hero-sub">Manual integral de inteligencia para la detección y respuesta ante estafas de inversión y suplantación bancaria en el ecosistema digital peruano.</p>
+            <p class="hero-sub">Portal avanzado de ciberseguridad alineado a estándares internacionales para la detección de ingeniería social y respuesta ante fraude financiero.</p>
             
             <div class="tool-grid">
                 <a href="https://urlscan.io" target="_blank" class="tool-link">
                     <strong>URLScan.io</strong>
-                    <span>Análisis de enlace profundo</span>
+                    <span>Deep Link Analysis</span>
                 </a>
                 <a href="https://www.virustotal.com" target="_blank" class="tool-link">
                     <strong>VirusTotal</strong>
-                    <span>Reputación e historial</span>
-                </a>
-                <a href="https://www.scamadviser.com" target="_blank" class="tool-link">
-                    <strong>ScamAdviser</strong>
-                    <span>Puntaje de confianza</span>
+                    <span>Reputation Scan</span>
                 </a>
                 <a href="https://www.abuseipdb.com" target="_blank" class="tool-link">
                     <strong>AbuseIPDB</strong>
-                    <span>Reporte de IPs maliciosas</span>
+                    <span>Malicious IP Reports</span>
+                </a>
+                <a href="https://www.scamadviser.com" target="_blank" class="tool-link">
+                    <strong>ScamAdviser</strong>
+                    <span>Trust Score Check</span>
                 </a>
             </div>
         </div>
@@ -197,70 +201,59 @@
     <main class="container">
         
         <section class="content-card">
-            <div class="section-header">
-                <h2>Anatomía de la Estafa de Tareas</h2>
-                <p style="color: var(--text-dim);">Entiende el mecanismo detrás de los esquemas Ponzi digitales actuales.</p>
-            </div>
+            <h2 style="font-size: 2.2rem; margin-bottom: 2rem;">Vectores de Ataque: Ingeniería Social</h2>
             <div class="info-grid">
                 <div class="info-item">
-                    <h3>El Gancho (Social Eng)</h3>
-                    <p>Todo comienza con un mensaje vía WhatsApp o Telegram. Prometen ganancias diarias por "dar likes" o "escribir reseñas". El primer pago (S/ 5 o S/ 10) es real, diseñado para hackear tu psicología de confianza.</p>
+                    <h3>Psicología de la Estafa</h3>
+                    <p>Las redes de estafas de tareas operan bajo principios de <strong>Garantía Inversa</strong>: primero entregan un beneficio real para desarmar el sistema crítico del usuario, para luego exigir desembolsos mayores mediante presión psicológica.</p>
                 </div>
                 <div class="info-item">
-                    <h3>La Infraestructura</h3>
-                    <p>Usan dominios de primer nivel (TLD) baratos como .top, .xyz o .online. Estos sitios son desechables y rotan cada 48 a 72 horas para evitar el rastreo de la policía informática.</p>
-                </div>
-                <div class="info-item">
-                    <h3>La Extracción</h3>
-                    <p>Una vez que ganas "falsa confianza", te piden depósitos mayores para "liberar fondos". Aquí es donde operan las cuentas mula, dispersando el dinero a múltiples bancos en segundos.</p>
+                    <h3>Ciclo de Vida del Phishing</h3>
+                    <p>Uso de dominios efímeros (.top, .online) controlados por Cloudflare para evadir análisis automatizados. Estos sitios mueren en cuestión de días, dificultando el rastreo forense post-ataque.</p>
                 </div>
             </div>
         </section>
 
-        <section class="content-card" style="border-top: 1px solid var(--secondary);">
-            <h2>Protocolo de Verificación de URLs</h2>
-            <p style="color: var(--text-dim); margin-bottom: 2rem;">Sigue estos pasos antes de hacer cualquier depósito o registro:</p>
-            <ul class="checklist">
-                <li><strong>Antigüedad del Dominio:</strong> Los sitios legítimos tienen años. Los fraudulentos tienen días.</li>
-                <li><strong>Certificado SSL:</strong> No es garantía de seguridad. Casi todas las estafas usan SSL gratuito para parecer "seguros".</li>
-                <li><strong>Redireccionamientos:</strong> Si el link cambia de nombre al entrar, es un vector de ataque confirmado.</li>
-                <li><strong>Búsqueda en Redes:</strong> Busca el nombre o el link en grupos de "Estafas Yape/Plin" en Facebook.</li>
-            </ul>
+        <!-- Compliance Section -->
+        <section class="standards-banner">
+            <h2 style="font-size: 2.4rem; font-weight: 800;">Gobernanza y Estándares</h2>
+            <p style="color: var(--text-dim); margin-top: 0.5rem;">Alineación con marcos de trabajo globales para la protección de activos de información.</p>
+            
+            <div class="standards-grid">
+                <div class="standard-box">
+                    <h4>ISO/IEC 27001</h4>
+                    <p style="font-size: 0.9rem; color: var(--text-dim);">Enfoque en el Control A.7.2.2 (Concienciación), vital para mitigar el error humano en estafas de ingeniería social.</p>
+                </div>
+                <div class="standard-box">
+                    <h4>COBIT 2019</h4>
+                    <p style="font-size: 0.9rem; color: var(--text-dim);">Gestión de Riesgos de TI (EDM03). Asegurar que el apetito de riesgo y la tolerancia se mantengan en niveles gobernados.</p>
+                </div>
+                <div class="standard-box">
+                    <h4>NIST CSF</h4>
+                    <p style="font-size: 0.9rem; color: var(--text-dim);">Marco de: Identificar, Proteger, Detectar, Responder y Recuperar ante incidentes de fraude digital.</p>
+                </div>
+                <div class="standard-box">
+                    <h4>Ley 30096</h4>
+                    <p style="font-size: 0.9rem; color: var(--text-dim);">Marco legal peruano para delitos informáticos, estableciendo penas severas para la interceptación y el fraude.</p>
+                </div>
+            </div>
         </section>
 
         <section class="case-study">
-            <h2>Caso de Estudio: Red de Chimbote (Abril 2026)</h2>
-            <p style="color: var(--text-dim); margin-bottom: 2rem;">Análisis de una red real detectada operando con identidades suplantadas y cuentas alquiladas.</p>
+            <h2>Caso de Estudio: Red de Cuentas Mula (Chimbote 2026)</h2>
+            <p style="color: var(--text-dim); margin-bottom: 2rem;">Identidades detectadas utilizando perfiles laborales reales para enmascarar actividades de lavado de fondos.</p>
             <div class="mule-list">
                 <div class="mule-item">
-                    <span>Mendoza Arica Fernando (Yape)</span>
-                    <span style="color: var(--text-dim);">DNI 6120****</span>
+                    <span>Fernando Aldair Mendoza A.</span>
+                    <span style="color: var(--text-dim);">DNI 6120**** | Nodo Yape</span>
                 </div>
                 <div class="mule-item">
-                    <span>Elizabeth Violeta Castillo (Plin)</span>
-                    <span style="color: var(--text-dim);">DNI 4633****</span>
+                    <span>Elizabeth Violeta Castillo H.</span>
+                    <span style="color: var(--text-dim);">DNI 4633**** | Nodo Plin</span>
                 </div>
                 <div class="mule-item">
-                    <span>Ydrogo Rodriguez Bruno (Efectiva)</span>
-                    <span style="color: var(--text-dim);">DNI 7404****</span>
-                </div>
-            </div>
-            <p style="margin-top: 1.5rem; font-size: 0.85rem; color: var(--accent);">* Datos obtenidos de investigación OSINT de fuentes públicas. No realice transferencias a estos perfiles.</p>
-        </section>
-
-        <section style="margin-top: 6rem;">
-            <div class="section-header">
-                <h2>Respuesta Legal (Ley 30096)</h2>
-                <p style="color: var(--text-dim);">El Fraude Informático tiene una pena de hasta 8 años de prisión en Perú.</p>
-            </div>
-            <div class="info-grid">
-                <div class="info-item" style="background: rgba(255,255,255,0.02); padding: 2rem; border-radius: 20px;">
-                    <h3>Paso 1: Evidencia</h3>
-                    <p>Toma capturas de pantalla de la URL, el comprobante y el número de contacto. No borres la conversación.</p>
-                </div>
-                <div class="info-item" style="background: rgba(255,255,255,0.02); padding: 2rem; border-radius: 20px;">
-                    <h3>Paso 2: Reporte</h3>
-                    <p>Llama a tu banco para congelar el movimiento y acude a la DIVINDAT (01 431 8178).</p>
+                    <span>Ydrogo Rodriguez Bruno A.</span>
+                    <span style="color: var(--text-dim);">DNI 7404**** | Nodo Efec.</span>
                 </div>
             </div>
         </section>
@@ -269,8 +262,8 @@
 
     <footer>
         <div class="container">
-            <p><strong>Ciberseguridad Proactiva</strong></p>
-            <p style="margin-top: 1rem; opacity: 0.6;">Este portal es gratuito y de uso informativo. La mejor defensa contra el cibercrimen es la educación.</p>
+            <p><strong>© 2026 Inteligencia Digital & Gestión de Seguridad</strong></p>
+            <p style="margin-top: 0.5rem; opacity: 0.6; font-size: 0.8rem;">La seguridad no es un producto, es un proceso de gobernanza continua.</p>
         </div>
     </footer>
 
