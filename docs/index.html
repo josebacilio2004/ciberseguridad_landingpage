@@ -3,358 +3,276 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Portal de Inteligencia y Ciberseguridad | Prevención de Estafas</title>
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <title>Defensa Digital | Portal de Inteligencia de Ciberseguridad</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
     <style>
         :root {
-            --bg: #030712;
-            --surface: #111827;
-            --surface-accent: #1f2937;
-            --primary: #60a5fa;
-            --secondary: #2dd4bf;
-            --warning: #f59e0b;
-            --danger: #ef4444;
-            --text: #f3f4f6;
-            --text-muted: #9ca3af;
-            --glass: rgba(17, 24, 39, 0.7);
-            --border: rgba(255, 255, 255, 0.1);
+            --bg: #050505;
+            --surface: #0f0f12;
+            --primary: #3b82f6;
+            --secondary: #10b981;
+            --accent: #f43f5e;
+            --text: #ffffff;
+            --text-dim: #94a3b8;
+            --glass: rgba(255, 255, 255, 0.03);
+            --border: rgba(255, 255, 255, 0.08);
         }
 
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        html { scroll-behavior: smooth; }
-        body { 
-            background-color: var(--bg); 
-            color: var(--text); 
-            font-family: 'Outfit', sans-serif;
-            overflow-x: hidden;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Outfit', sans-serif; }
+        body { background-color: var(--bg); color: var(--text); line-height: 1.6; overflow-x: hidden; }
+        .container { max-width: 1100px; margin: 0 auto; padding: 0 2rem; }
 
         /* --- Animations --- */
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
-        @keyframes glow { 0%, 100% { box-shadow: 0 0 10px var(--primary); } 50% { box-shadow: 0 0 25px var(--primary); } }
+        @keyframes slideUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes glow { 0%, 100% { filter: drop-shadow(0 0 5px var(--primary)); } 50% { filter: drop-shadow(0 0 15px var(--primary)); } }
 
-        /* --- Layout --- */
-        .container { max-width: 1200px; margin: 0 auto; padding: 0 2rem; }
-        section { padding: 6rem 0; border-bottom: 1px solid var(--border); }
-
-        /* --- Header --- */
+        /* --- Header / Hero --- */
         header {
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+            padding: 8rem 0 4rem;
             text-align: center;
-            background: radial-gradient(circle at 50% 50%, #1e3a8a 0%, transparent 60%);
+            background: radial-gradient(circle at top, #1e3a8a 0%, transparent 60%);
         }
 
-        .category-tag {
+        .badge {
             display: inline-block;
-            background: rgba(96, 165, 250, 0.1);
-            color: var(--primary);
-            padding: 0.5rem 1.5rem;
-            border-radius: 99px;
-            font-weight: 600;
-            border: 1px solid var(--primary);
-            margin-bottom: 2rem;
-            animation: fadeIn 0.8s ease-out;
+            background: rgba(244, 63, 94, 0.1);
+            color: var(--accent);
+            padding: 0.4rem 1.2rem;
+            border-radius: 100px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            border: 1px solid rgba(244, 63, 94, 0.3);
+            margin-bottom: 1.5rem;
         }
 
         h1 {
-            font-size: 4.5rem;
+            font-size: 4rem;
             font-weight: 800;
-            line-height: 1.1;
-            margin-bottom: 1.5rem;
-            background: linear-gradient(to right, #fff, var(--primary));
+            margin-bottom: 1rem;
+            background: linear-gradient(to bottom, #ffffff, #64748b);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            animation: fadeIn 1s ease-out;
         }
 
-        header p {
-            font-size: 1.25rem;
-            color: var(--text-muted);
-            max-width: 800px;
-            margin: 0 auto;
-            animation: fadeIn 1.2s ease-out;
+        .hero-sub {
+            font-size: 1.2rem;
+            color: var(--text-dim);
+            max-width: 700px;
+            margin: 0 auto 3rem;
         }
 
-        /* --- Smart Checker Tool --- */
-        .checker-box {
-            background: var(--glass);
-            backdrop-filter: blur(20px);
+        /* --- Tool Grid --- */
+        .tool-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-bottom: 6rem;
+        }
+
+        .tool-link {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            padding: 1.5rem;
+            border-radius: 16px;
+            text-decoration: none;
+            color: white;
+            text-align: center;
+            transition: all 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .tool-link:hover {
+            transform: translateY(-5px);
+            border-color: var(--primary);
+            background: rgba(59, 130, 246, 0.05);
+        }
+
+        .tool-link strong { font-size: 1.1rem; color: var(--primary); }
+        .tool-link span { font-size: 0.8rem; color: var(--text-dim); }
+
+        /* --- Content Sections --- */
+        .section-header { margin-bottom: 3rem; }
+        .section-header h2 { font-size: 2.2rem; margin-bottom: 1rem; }
+        
+        .content-card {
+            background: var(--surface);
             padding: 3rem;
             border-radius: 32px;
             border: 1px solid var(--border);
-            margin-top: 4rem;
-            max-width: 800px;
-            width: 100%;
-            animation: fadeIn 1.4s ease-out;
+            margin-bottom: 4rem;
+            transition: border-color 0.4s;
         }
 
-        .input-group {
-            display: flex;
-            gap: 1rem;
-            margin-top: 2rem;
-        }
+        .content-card:hover { border-color: rgba(255,255,255,0.15); }
 
-        input[type="url"] {
-            flex: 1;
-            background: rgba(0,0,0,0.3);
-            border: 1px solid var(--border);
-            padding: 1.25rem;
-            border-radius: 12px;
-            color: white;
-            font-size: 1rem;
-        }
-
-        .btn-analyze {
-            background: var(--primary);
-            color: var(--bg);
-            padding: 1rem 2rem;
-            border-radius: 12px;
-            border: none;
-            font-weight: 700;
-            cursor: pointer;
-            transition: all 0.3s;
-        }
-
-        .btn-analyze:hover { transform: scale(1.05); filter: brightness(1.2); }
-
-        /* --- Documentation Sections --- */
         .info-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 3rem;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2.5rem;
         }
 
-        .info-card {
-            background: var(--surface);
-            padding: 2.5rem;
-            border-radius: 24px;
-            border: 1px solid var(--border);
-        }
+        .info-item h3 { color: var(--secondary); margin-bottom: 1rem; font-size: 1.4rem; }
+        .info-item p { color: var(--text-dim); font-size: 0.95rem; }
 
-        .info-card h3 {
-            font-size: 1.75rem;
-            margin-bottom: 1.5rem;
-            color: var(--secondary);
-        }
-
-        .info-card ul {
-            list-style: none;
-            color: var(--text-muted);
-        }
-
-        .info-card li {
-            margin-bottom: 1rem;
-            padding-left: 1.5rem;
-            position: relative;
-        }
-
-        .info-card li::before {
-            content: '→';
-            position: absolute;
-            left: 0;
-            color: var(--primary);
-        }
-
-        /* --- Methodology: The Pyramid of Scam --- */
-        .pyramid-section { text-align: center; }
-        .step-container {
+        /* --- Checklist --- */
+        .checklist { list-style: none; margin-top: 2rem; }
+        .checklist li {
+            padding: 0.8rem 0;
+            border-bottom: 1px solid var(--border);
             display: flex;
-            flex-direction: column;
-            gap: 2rem;
             align-items: center;
-            margin-top: 4rem;
+            gap: 1rem;
         }
+        .checklist li::before { content: "✓"; color: var(--secondary); font-weight: 800; }
 
-        .step-bubble {
-            background: var(--surface-accent);
-            padding: 2rem;
-            border-radius: 50% 50% 0 50%;
-            width: 80%;
-            max-width: 600px;
-            border-left: 4px solid var(--warning);
-        }
-
-        /* --- Analysis of Real Cases (The Blacklist Example) --- */
-        .blacklist {
-            background: rgba(239, 68, 68, 0.05);
-            border: 1px solid rgba(239, 68, 68, 0.2);
-            border-radius: 24px;
+        /* --- Case Study --- */
+        .case-study {
+            background: linear-gradient(135deg, #111827 0%, #050505 100%);
             padding: 3rem;
-            margin-top: 3rem;
+            border-radius: 32px;
+            border-left: 6px solid var(--accent);
         }
 
-        .blacklist-item {
+        .mule-list { margin-top: 2rem; }
+        .mule-item {
+            background: rgba(255,255,255,0.02);
+            padding: 1.2rem;
+            border-radius: 12px;
+            margin-bottom: 0.8rem;
             display: flex;
             justify-content: space-between;
-            padding: 1.5rem 0;
-            border-bottom: 1px solid rgba(255,255,255,0.05);
-            font-family: 'JetBrains Mono', monospace;
+            border: 1px solid var(--border);
         }
-
-        .blacklist-item span:first-child { color: var(--danger); font-weight: 700; }
 
         /* --- Footer --- */
         footer {
-            padding: 4rem 0;
+            padding: 6rem 0 4rem;
             text-align: center;
-            color: var(--text-muted);
             border-top: 1px solid var(--border);
+            color: var(--text-dim);
+            font-size: 0.9rem;
         }
 
         /* --- Responsive --- */
         @media (max-width: 768px) {
             h1 { font-size: 2.5rem; }
-            .input-group { flex-direction: column; }
+            .content-card { padding: 1.5rem; }
         }
     </style>
 </head>
 <body>
 
     <header>
-        <div class="container">
-            <div class="category-tag">División de Inteligencia Digital</div>
-            <h1>Protección Integral Contra Estafas Informáticas</h1>
-            <p>Portal avanzado para la detección de ingeniería social, análisis técnico de phishing y guía legal para víctimas de fraude financiero.</p>
+        <div class="container" style="animation: slideUp 0.8s ease-out;">
+            <div class="badge">Estrategia de Defensa Activa</div>
+            <h1>Defensa Digital</h1>
+            <p class="hero-sub">Manual integral de inteligencia para la detección y respuesta ante estafas de inversión y suplantación bancaria en el ecosistema digital peruano.</p>
             
-            <div class="checker-box">
-                <h3>Verificador de Seguridad (Alpha)</h3>
-                <p>Ingresa una URL sospechosa para analizarla en tiempo real en laboratorios de seguridad externos.</p>
-                <div class="input-group">
-                    <input type="url" id="targetUrl" placeholder="https://ejemplo-sospechoso.com/code/..." required>
-                    <button class="btn-analyze" onclick="analyzeUrl()">Analizar Riesgo</button>
-                </div>
+            <div class="tool-grid">
+                <a href="https://urlscan.io" target="_blank" class="tool-link">
+                    <strong>URLScan.io</strong>
+                    <span>Análisis de enlace profundo</span>
+                </a>
+                <a href="https://www.virustotal.com" target="_blank" class="tool-link">
+                    <strong>VirusTotal</strong>
+                    <span>Reputación e historial</span>
+                </a>
+                <a href="https://www.scamadviser.com" target="_blank" class="tool-link">
+                    <strong>ScamAdviser</strong>
+                    <span>Puntaje de confianza</span>
+                </a>
+                <a href="https://www.abuseipdb.com" target="_blank" class="tool-link">
+                    <strong>AbuseIPDB</strong>
+                    <span>Reporte de IPs maliciosas</span>
+                </a>
             </div>
         </div>
     </header>
 
-    <section id="encyclopedia">
-        <div class="container">
-            <h2 style="font-size: 2.5rem; margin-bottom: 4rem;">Manual de Prevención Avanzada</h2>
+    <main class="container">
+        
+        <section class="content-card">
+            <div class="section-header">
+                <h2>Anatomía de la Estafa de Tareas</h2>
+                <p style="color: var(--text-dim);">Entiende el mecanismo detrás de los esquemas Ponzi digitales actuales.</p>
+            </div>
             <div class="info-grid">
-                <div class="info-card">
-                    <h3>Anatomía del Phishing</h3>
-                    <p style="margin-bottom: 1.5rem;">Las estafas de hoy no son simples correos mal redactados. Son infraestructuras complejas que incluyen:</p>
-                    <ul>
-                        <li><strong>Redireccionamientos Dinámicos:</strong> El enlace que recibes no es el destino final. Pasa por un "puente" para evitar que el antivirus lo detecte.</li>
-                        <li><strong>Certificados TLS Cortos:</strong> Usan certificados gratuitos (Let's Encrypt) que expiran en 90 días, perfectos para ataques temporales.</li>
-                        <li><strong>Exclusión de Bots:</strong> El sitio verifica si eres un "humano" de un país específico antes de mostrar el contenido malicioso.</li>
-                    </ul>
+                <div class="info-item">
+                    <h3>El Gancho (Social Eng)</h3>
+                    <p>Todo comienza con un mensaje vía WhatsApp o Telegram. Prometen ganancias diarias por "dar likes" o "escribir reseñas". El primer pago (S/ 5 o S/ 10) es real, diseñado para hackear tu psicología de confianza.</p>
                 </div>
-                <div class="info-card">
-                    <h3>Ingeniería Social</h3>
-                    <p style="margin-bottom: 1.5rem;">El ataque no es técnico, es psicológico:</p>
-                    <ul>
-                        <li><strong>Escasez Impuesta:</strong> "Solo 5 cupos libres para el trabajo".</li>
-                        <li><strong>Prueba Social:</strong> Grupos de Telegram con perfiles falsos que "agradecen" por los pagos.</li>
-                        <li><strong>El Primer Pago:</strong> Te devuelven una pequeña suma de dinero al inicio para que el sesgo de confirmación te obligue a confiar.</li>
-                    </ul>
+                <div class="info-item">
+                    <h3>La Infraestructura</h3>
+                    <p>Usan dominios de primer nivel (TLD) baratos como .top, .xyz o .online. Estos sitios son desechables y rotan cada 48 a 72 horas para evitar el rastreo de la policía informática.</p>
+                </div>
+                <div class="info-item">
+                    <h3>La Extracción</h3>
+                    <p>Una vez que ganas "falsa confianza", te piden depósitos mayores para "liberar fondos". Aquí es donde operan las cuentas mula, dispersando el dinero a múltiples bancos en segundos.</p>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <section id="methodology" class="pyramid-section">
-        <div class="container">
-            <h2>El Ciclo del Dinero (Scam Flow)</h2>
-            <div class="step-container">
-                <div class="step-bubble">
-                    <strong>1. Atracción:</strong> Anuncio en YouTube, TikTok o WhatsApp ofreciendo retornos del 200%.
-                </div>
-                <div class="step-bubble">
-                    <strong>2. Engagement:</strong> Te invitan a un grupo "privado" donde todos están ganando dinero.
-                </div>
-                <div class="step-bubble">
-                    <strong>3. La Inversión:</strong> Empiezas con montos bajos (S/ 10 o S/ 20) que sí te pagan de vuelta.
-                </div>
-                <div class="step-bubble" style="border-left-color: var(--danger);">
-                    <strong>4. El Golpe:</strong> Te piden una inversión mayor (S/ 500+) para "desbloquear una misión de alto nivel". Una vez depositado, te bloquean.
-                </div>
-            </div>
-        </div>
-    </section>
+        <section class="content-card" style="border-top: 1px solid var(--secondary);">
+            <h2>Protocolo de Verificación de URLs</h2>
+            <p style="color: var(--text-dim); margin-bottom: 2rem;">Sigue estos pasos antes de hacer cualquier depósito o registro:</p>
+            <ul class="checklist">
+                <li><strong>Antigüedad del Dominio:</strong> Los sitios legítimos tienen años. Los fraudulentos tienen días.</li>
+                <li><strong>Certificado SSL:</strong> No es garantía de seguridad. Casi todas las estafas usan SSL gratuito para parecer "seguros".</li>
+                <li><strong>Redireccionamientos:</strong> Si el link cambia de nombre al entrar, es un vector de ataque confirmado.</li>
+                <li><strong>Búsqueda en Redes:</strong> Busca el nombre o el link en grupos de "Estafas Yape/Plin" en Facebook.</li>
+            </ul>
+        </section>
 
-    <section id="casos">
-        <div class="container">
-            <h2>Casos de Estudio Reales (Base de Datos)</h2>
-            <p>Perfiles comunes detectados en redes de "Cuentas Mula" identificadas en investigaciones recientes en Perú (Área Chimbote/Lima).</p>
-            <div class="blacklist">
-                <div class="blacklist-item">
-                    <span>Mendoza Arica F. A.</span>
-                    <span>DNI: 6120****</span>
-                    <span>Nodo: YAPE (BCP)</span>
+        <section class="case-study">
+            <h2>Caso de Estudio: Red de Chimbote (Abril 2026)</h2>
+            <p style="color: var(--text-dim); margin-bottom: 2rem;">Análisis de una red real detectada operando con identidades suplantadas y cuentas alquiladas.</p>
+            <div class="mule-list">
+                <div class="mule-item">
+                    <span>Mendoza Arica Fernando (Yape)</span>
+                    <span style="color: var(--text-dim);">DNI 6120****</span>
                 </div>
-                <div class="blacklist-item">
-                    <span>Vivas Villacorta N.</span>
-                    <span>DNI: 4273****</span>
-                    <span>Nodo: PLIN (Interbank)</span>
+                <div class="mule-item">
+                    <span>Elizabeth Violeta Castillo (Plin)</span>
+                    <span style="color: var(--text-dim);">DNI 4633****</span>
                 </div>
-                <div class="blacklist-item">
-                    <span>Ydrogo Rodriguez B. A.</span>
-                    <span>DNI: 7404****</span>
-                    <span>Nodo: FIN. EFECTIVA</span>
+                <div class="mule-item">
+                    <span>Ydrogo Rodriguez Bruno (Efectiva)</span>
+                    <span style="color: var(--text-dim);">DNI 7404****</span>
                 </div>
-                <p style="margin-top: 2rem; font-size: 0.8rem; color: var(--text-muted); text-align: center;">
-                    * Datos anonimizados con fines educativos. La red completa ha sido reportada a la DIVINDAT.
-                </p>
             </div>
-        </div>
-    </section>
+            <p style="margin-top: 1.5rem; font-size: 0.85rem; color: var(--accent);">* Datos obtenidos de investigación OSINT de fuentes públicas. No realice transferencias a estos perfiles.</p>
+        </section>
 
-    <section id="legal">
-        <div class="container">
-            <h2 style="margin-bottom: 2rem;">Marco Legal y Respuesta</h2>
-            <div style="background: var(--surface-accent); padding: 3rem; border-radius: 24px;">
-                <h3 style="color: var(--warning); margin-bottom: 1.5rem;">Ley 30096: Delitos Informáticos</h3>
-                <p style="margin-bottom: 2rem;">El artículo 8 establece penas de **3 a 8 años de prisión** por Fraude Informático. Si fuiste víctima:</p>
-                <div class="info-grid" style="grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));">
-                    <div>
-                        <strong>Paso 1: Preservación</strong>
-                        <p>No borres los vouchers ni los chats. Son evidencia digital forense.</p>
-                    </div>
-                    <div>
-                        <strong>Paso 2: Denuncia DIVINDAT</strong>
-                        <p>Llama al 01-431-8178 o escribe a <a href="mailto:divindat.pnp@pnp.gob.pe" style="color: var(--primary);">divindat.pnp@pnp.gob.pe</a>.</p>
-                    </div>
+        <section style="margin-top: 6rem;">
+            <div class="section-header">
+                <h2>Respuesta Legal (Ley 30096)</h2>
+                <p style="color: var(--text-dim);">El Fraude Informático tiene una pena de hasta 8 años de prisión en Perú.</p>
+            </div>
+            <div class="info-grid">
+                <div class="info-item" style="background: rgba(255,255,255,0.02); padding: 2rem; border-radius: 20px;">
+                    <h3>Paso 1: Evidencia</h3>
+                    <p>Toma capturas de pantalla de la URL, el comprobante y el número de contacto. No borres la conversación.</p>
+                </div>
+                <div class="info-item" style="background: rgba(255,255,255,0.02); padding: 2rem; border-radius: 20px;">
+                    <h3>Paso 2: Reporte</h3>
+                    <p>Llama a tu banco para congelar el movimiento y acude a la DIVINDAT (01 431 8178).</p>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
+
+    </main>
 
     <footer>
         <div class="container">
-            <p>Portal de Educación en Ciberseguridad &copy; 2026</p>
-            <p style="margin-top: 1rem; font-size: 0.8rem;">La prevención es la mejor defensa. Nunca compartas tus claves.</p>
+            <p><strong>Ciberseguridad Proactiva</strong></p>
+            <p style="margin-top: 1rem; opacity: 0.6;">Este portal es gratuito y de uso informativo. La mejor defensa contra el cibercrimen es la educación.</p>
         </div>
     </footer>
 
-    <script>
-        function analyzeUrl() {
-            const url = document.getElementById('targetUrl').value;
-            if (!url) {
-                alert('Por favor, ingresa una URL válida.');
-                return;
-            }
-
-            // Sanitización básica
-            const encodedUrl = encodeURIComponent(url);
-            
-            // Creamos una interfaz de elección para el usuario
-            const choice = confirm("¿Deseas analizar este enlace en urlscan.io?\n\n(Se abrirá en una nueva pestaña)");
-            
-            if (choice) {
-                window.open(`https://urlscan.io/search/#${encodedUrl}`, '_blank');
-                
-                // Sugerimos también VirusTotal
-                setTimeout(() => {
-                    if (confirm("¿También quieres verificar la reputación en VirusTotal?")) {
-                        window.open(`https://www.virustotal.com/gui/search/${encodedUrl}`, '_blank');
-                    }
-                }, 500);
-            }
-        }
-    </script>
 </body>
 </html>
