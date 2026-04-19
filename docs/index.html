@@ -200,9 +200,9 @@
             <div class="hero-text">
                 <div class="terminal">
                     <div class="terminal-header">> INTEL-SYS VERSION 4.0.1</div>
-                    <p style="color: #0f0;">[OK] Protokolo de seguridad cargado.</p>
-                    <p style="color: #0f0;">[OK] Escaneo de IPs regionales activado.</p>
-                    <p style="color: #ff0;">[!] Alerta: Red de Chimbote identificada.</p>
+                    <div id="terminal-body" style="font-family: 'JetBrains Mono', monospace;">
+                        <!-- El texto se cargará mediante JS -->
+                    </div>
                 </div>
                 <h1>Defensa Digital Avanzada</h1>
                 <p class="hero-sub">Portal dinámico de ciberseguridad. Análisis de riesgos, mapeo forense de estafas y gobernanza proactiva para la era digital.</p>
@@ -364,6 +364,42 @@
     </footer>
 
     <script>
+        // Terminal Typing Effect
+        const terminalBody = document.getElementById('terminal-body');
+        const lines = [
+            { text: "[OK] Protocolo de seguridad cargado.", color: "#0f0" },
+            { text: "[OK] Escaneo de IPs regionales activado.", color: "#0f0" },
+            { text: "[!] Alerta: Red de Chimbote identificada.", color: "#ff0" }
+        ];
+
+        let lineIdx = 0;
+        let charIdx = 0;
+
+        function typeWriter() {
+            if (lineIdx < lines.length) {
+                if (charIdx === 0) {
+                    const p = document.createElement('p');
+                    p.style.color = lines[lineIdx].color;
+                    p.style.marginBottom = '0.5rem';
+                    terminalBody.appendChild(p);
+                }
+
+                const currentLine = lines[lineIdx].text;
+                if (charIdx < currentLine.length) {
+                    terminalBody.lastChild.textContent += currentLine.charAt(charIdx);
+                    charIdx++;
+                    setTimeout(typeWriter, 40);
+                } else {
+                    lineIdx++;
+                    charIdx = 0;
+                    setTimeout(typeWriter, 500);
+                }
+            }
+        }
+
+        // Initialize Typing Effect
+        setTimeout(typeWriter, 1000);
+
         // Matrix Rain Animation optimized for performance
         const canvas = document.getElementById('matrix-canvas');
         const ctx = canvas.getContext('2d');
