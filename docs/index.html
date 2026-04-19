@@ -4,268 +4,324 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Defensa Digital | Portal de Inteligencia de Ciberseguridad</title>
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
     <style>
         :root {
             --bg: #050505;
-            --surface: #0f0f12;
+            --surface: rgba(15, 15, 18, 0.95);
             --primary: #3b82f6;
             --secondary: #10b981;
             --accent: #f43f5e;
             --text: #ffffff;
             --text-dim: #94a3b8;
-            --glass: rgba(255, 255, 255, 0.03);
-            --border: rgba(255, 255, 255, 0.08);
+            --border: rgba(255, 255, 255, 0.1);
         }
 
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Outfit', sans-serif; }
-        body { background-color: var(--bg); color: var(--text); line-height: 1.6; overflow-x: hidden; }
-        .container { max-width: 1100px; margin: 0 auto; padding: 0 2rem; }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body { 
+            background-color: var(--bg); 
+            color: var(--text); 
+            font-family: 'Outfit', sans-serif;
+            overflow-x: hidden;
+        }
 
-        /* --- Animations --- */
-        @keyframes slideUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+        /* --- Matrix Rain Canvas --- */
+        #matrix-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            opacity: 0.15;
+        }
 
         /* --- Header / Hero --- */
-        header {
-            padding: 8rem 0 4rem;
-            text-align: center;
-            background: radial-gradient(circle at top, #1e3a8a 0%, transparent 60%);
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+            position: relative;
         }
 
-        .badge {
-            display: inline-block;
-            background: rgba(244, 63, 94, 0.1);
-            color: var(--accent);
-            padding: 0.4rem 1.2rem;
-            border-radius: 100px;
-            font-size: 0.75rem;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            border: 1px solid rgba(244, 63, 94, 0.3);
-            margin-bottom: 1.5rem;
+        .hero-content {
+            max-width: 1200px;
+            display: grid;
+            grid-template-columns: 1.2fr 1fr;
+            gap: 4rem;
+            align-items: center;
         }
+
+        .hero-text { animation: slideUp 0.8s ease-out; }
+
+        .terminal {
+            background: #000;
+            border-radius: 12px;
+            padding: 1.5rem;
+            font-family: 'JetBrains Mono', monospace;
+            border: 1px solid var(--secondary);
+            box-shadow: 0 0 20px rgba(16, 185, 129, 0.2);
+            margin-bottom: 2rem;
+            font-size: 0.9rem;
+        }
+
+        .terminal-header { color: var(--secondary); margin-bottom: 1rem; border-bottom: 1px solid rgba(16, 185, 129, 0.3); padding-bottom: 0.5rem; }
 
         h1 {
-            font-size: 4rem;
+            font-size: 4.5rem;
             font-weight: 800;
-            margin-bottom: 1rem;
-            background: linear-gradient(to bottom, #ffffff, #64748b);
+            line-height: 1;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(to right, #fff, var(--primary));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
 
-        .hero-sub {
-            font-size: 1.2rem;
-            color: var(--text-dim);
-            max-width: 700px;
-            margin: 0 auto 3rem;
+        .hero-image {
+            position: relative;
+            animation: fadeIn 1.5s ease;
         }
 
-        /* --- Tool Grid --- */
-        .tool-grid {
+        .hero-image img {
+            width: 100%;
+            border-radius: 24px;
+            mask-image: linear-gradient(to bottom, black 80%, transparent);
+        }
+
+        /* --- Section Styling --- */
+        .section-padding { padding: 8rem 0; }
+        .container { max-width: 1100px; margin: 0 auto; padding: 0 2rem; }
+
+        .card-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 1rem;
-            margin-bottom: 6rem;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2rem;
+            margin-top: 4rem;
         }
 
-        .tool-link {
+        .card {
             background: var(--surface);
-            border: 1px solid var(--border);
-            padding: 1.5rem;
-            border-radius: 16px;
-            text-decoration: none;
-            color: white;
-            text-align: center;
-            transition: all 0.3s ease;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        .tool-link:hover {
-            transform: translateY(-5px);
-            border-color: var(--primary);
-            background: rgba(59, 130, 246, 0.05);
-        }
-
-        .tool-link strong { font-size: 1.1rem; color: var(--primary); }
-        .tool-link span { font-size: 0.8rem; color: var(--text-dim); }
-
-        /* --- Content Sections --- */
-        .content-card {
-            background: var(--surface);
+            backdrop-filter: blur(10px);
             padding: 3rem;
             border-radius: 32px;
             border: 1px solid var(--border);
-            margin-bottom: 4rem;
+            transition: all 0.3s ease;
         }
 
-        .info-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2.5rem;
-        }
+        .card:hover { border-color: var(--primary); transform: translateY(-5px); }
+        .card img { width: 100%; border-radius: 16px; margin-bottom: 2rem; }
 
-        .info-item h3 { color: var(--secondary); margin-bottom: 1rem; font-size: 1.4rem; }
-        .info-item p { color: var(--text-dim); font-size: 0.95rem; }
-
-        /* --- Compliance / Standards Section --- */
-        .standards-banner {
-            background: linear-gradient(90deg, #1e3a8a 0%, #0f172a 100%);
-            padding: 4rem 3rem;
-            border-radius: 40px;
-            margin: 6rem 0;
-            border: 1px solid rgba(255,255,255,0.1);
-        }
-
-        .standards-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 2rem;
+        /* --- Tool Grid --- */
+        .tool-bar {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
             margin-top: 3rem;
         }
 
-        .standard-box {
-            background: rgba(255,255,255,0.03);
-            padding: 2rem;
-            border-radius: 20px;
-            border: 1px solid rgba(255,255,255,0.05);
+        .btn-tool {
+            background: rgba(255,255,255,0.05);
+            color: white;
+            padding: 1rem 2rem;
+            border-radius: 12px;
+            text-decoration: none;
+            border: 1px solid var(--border);
+            font-weight: 600;
+            transition: 0.3s;
         }
 
-        .standard-box h4 { color: var(--primary); margin-bottom: 0.5rem; }
+        .btn-tool:hover { background: var(--primary); color: #000; border-color: var(--primary); }
+
+        /* --- Compliance Section --- */
+        .compliance {
+            background: linear-gradient(90deg, #1e3a8a 0%, #060b1a 100%);
+            padding: 5rem;
+            border-radius: 40px;
+            margin: 4rem 0;
+        }
 
         /* --- Case Study --- */
-        .case-study {
-            background: linear-gradient(135deg, #111827 0%, #050505 100%);
-            padding: 3rem;
-            border-radius: 32px;
-            border-left: 6px solid var(--accent);
-        }
+        .case-header { color: var(--accent); margin-bottom: 2rem; letter-spacing: 2px; text-transform: uppercase; font-size: 0.8rem; font-weight: 800; }
+        
+        .mule-table { width: 100%; border-collapse: collapse; margin-top: 2rem; }
+        .mule-table th { text-align: left; padding: 1rem; color: var(--text-dim); font-size: 0.8rem; text-transform: uppercase; }
+        .mule-table td { padding: 1.5rem 1rem; border-top: 1px solid var(--border); }
 
-        .mule-item {
-            background: rgba(255,255,255,0.02);
-            padding: 1.2rem;
-            border-radius: 12px;
-            margin-bottom: 0.8rem;
-            display: flex;
-            justify-content: space-between;
-            border: 1px solid var(--border);
-        }
+        /* --- Animations --- */
+        @keyframes slideUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
 
-        /* --- Footer --- */
-        footer {
-            padding: 6rem 0 4rem;
-            text-align: center;
-            border-top: 1px solid var(--border);
-            color: var(--text-dim);
-        }
-
-        @media (max-width: 768px) {
-            h1 { font-size: 2.5rem; }
-            .content-card, .standards-banner { padding: 1.5rem; }
+        @media (max-width: 968px) {
+            .hero-content { grid-template-columns: 1fr; text-align: center; }
+            h1 { font-size: 3rem; }
+            .hero-image { display: none; }
         }
     </style>
 </head>
 <body>
 
-    <header>
-        <div class="container" style="animation: slideUp 0.8s ease-out;">
-            <div class="badge">Estrategia de Inteligencia & Gestión de Riesgos</div>
-            <h1>Defensa Digital</h1>
-            <p class="hero-sub">Portal avanzado de ciberseguridad alineado a estándares internacionales para la detección de ingeniería social y respuesta ante fraude financiero.</p>
-            
-            <div class="tool-grid">
-                <a href="https://urlscan.io" target="_blank" class="tool-link">
-                    <strong>URLScan.io</strong>
-                    <span>Deep Link Analysis</span>
-                </a>
-                <a href="https://www.virustotal.com" target="_blank" class="tool-link">
-                    <strong>VirusTotal</strong>
-                    <span>Reputation Scan</span>
-                </a>
-                <a href="https://www.abuseipdb.com" target="_blank" class="tool-link">
-                    <strong>AbuseIPDB</strong>
-                    <span>Malicious IP Reports</span>
-                </a>
-                <a href="https://www.scamadviser.com" target="_blank" class="tool-link">
-                    <strong>ScamAdviser</strong>
-                    <span>Trust Score Check</span>
-                </a>
+    <canvas id="matrix-canvas"></canvas>
+
+    <header class="hero">
+        <div class="hero-content">
+            <div class="hero-text">
+                <div class="terminal">
+                    <div class="terminal-header">> SISTEMA DE INTELIGENCIA ACTIVO</div>
+                    <p style="color: #0f0;">[OK] Escaneando vectores de ataque...</p>
+                    <p style="color: #0f0;">[OK] Detectando infraestructura criminal...</p>
+                    <p style="color: #ff0;">[!] Alerta: Red de estafas detectada en la región.</p>
+                </div>
+                <h1>Defensa Digital Avanzada</h1>
+                <p class="hero-sub">Portal consolidado de ciberseguridad. Análisis forense, mapeo de riesgos y educación proactiva contra el cibercrimen financiero.</p>
+                <div class="tool-bar">
+                    <a href="#analisis" class="btn-tool">Análisis Técnico</a>
+                    <a href="#casos" class="btn-tool" style="border-color: var(--accent); color: var(--accent);">Casos Reales</a>
+                    <a href="#compliance" class="btn-tool">Gobernanza ISO</a>
+                </div>
+            </div>
+            <div class="hero-image">
+                <img src="assets/criminal.png" alt="Ciberdelincuente">
             </div>
         </div>
     </header>
 
     <main class="container">
-        
-        <section class="content-card">
-            <h2 style="font-size: 2.2rem; margin-bottom: 2rem;">Vectores de Ataque: Ingeniería Social</h2>
-            <div class="info-grid">
-                <div class="info-item">
-                    <h3>Psicología de la Estafa</h3>
-                    <p>Las redes de estafas de tareas operan bajo principios de <strong>Garantía Inversa</strong>: primero entregan un beneficio real para desarmar el sistema crítico del usuario, para luego exigir desembolsos mayores mediante presión psicológica.</p>
+
+        <section id="analisis" class="section-padding">
+            <h2 style="font-size: 2.5rem; margin-bottom: 3rem;">1. Anatomía del Ataque</h2>
+            <div class="card-grid">
+                <div class="card">
+                    <img src="assets/phishing.png" alt="Phishing Hook">
+                    <h3>Vectores de Phishing</h3>
+                    <p style="color: var(--text-dim);">Uso de redirecciones dinámicas (nbndhsz.com -> ios.z3b34a6.top) para saltar filtros de correo y SMS. Los dominios tienen una vida útil menor a 7 días.</p>
                 </div>
-                <div class="info-item">
-                    <h3>Ciclo de Vida del Phishing</h3>
-                    <p>Uso de dominios efímeros (.top, .online) controlados por Cloudflare para evadir análisis automatizados. Estos sitios mueren en cuestión de días, dificultando el rastreo forense post-ataque.</p>
+                <div class="card">
+                    <h3>Ingeniería Social</h3>
+                    <p style="color: var(--text-dim);">El "Hook" psicológico: Promesas de retornos inmediatos en plataformas que simulan ser AliExpress. El estafador gana confianza con pagos pequeños antes del gran golpe.</p>
                 </div>
             </div>
         </section>
 
-        <!-- Compliance Section -->
-        <section class="standards-banner">
-            <h2 style="font-size: 2.4rem; font-weight: 800;">Gobernanza y Estándares</h2>
-            <p style="color: var(--text-dim); margin-top: 0.5rem;">Alineación con marcos de trabajo globales para la protección de activos de información.</p>
+        <section id="compliance" class="compliance">
+            <div style="display: flex; gap: 4rem; align-items: center; flex-wrap: wrap;">
+                <div style="flex: 1; min-width: 300px;">
+                    <img src="assets/standards.png" alt="Shield Standards" style="width: 100%; border-radius: 20px;">
+                </div>
+                <div style="flex: 1.5; min-width: 300px;">
+                    <h2 style="font-size: 2.5rem; margin-bottom: 1.5rem;">Gobernanza y Estándares</h2>
+                    <p style="color: rgba(255,255,255,0.7); margin-bottom: 2rem;">No es solo tecnología, es gestión. Nuestra guía sigue las mejores prácticas de la industria global:</p>
+                    <ul style="list-style: none;">
+                        <li style="margin-bottom: 1rem;"><strong>ISO 27001:</strong> Control activo sobre la concienciación del factor humano.</li>
+                        <li style="margin-bottom: 1rem;"><strong>COBIT 2019:</strong> Gobernanza de riesgos para alinear el TI con la seguridad del usuario.</li>
+                        <li style="margin-bottom: 1rem;"><strong>NIST CSF:</strong> Marco de Identificación y Respuesta Rápida ante Fraude.</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <section id="casos" class="section-padding">
+            <div class="case-header">Inteligencia de Campo: Red de Chimbote</div>
+            <h2 style="font-size: 2.5rem; margin-bottom: 1rem;">Mapa de Cuentas Mula</h2>
+            <p style="color: var(--text-dim);">Identidades reales utilizadas para la dispersión de fondos sustraídos (Fraude de S/ 1,099.00).</p>
             
-            <div class="standards-grid">
-                <div class="standard-box">
-                    <h4>ISO/IEC 27001</h4>
-                    <p style="font-size: 0.9rem; color: var(--text-dim);">Enfoque en el Control A.7.2.2 (Concienciación), vital para mitigar el error humano en estafas de ingeniería social.</p>
-                </div>
-                <div class="standard-box">
-                    <h4>COBIT 2019</h4>
-                    <p style="font-size: 0.9rem; color: var(--text-dim);">Gestión de Riesgos de TI (EDM03). Asegurar que el apetito de riesgo y la tolerancia se mantengan en niveles gobernados.</p>
-                </div>
-                <div class="standard-box">
-                    <h4>NIST CSF</h4>
-                    <p style="font-size: 0.9rem; color: var(--text-dim);">Marco de: Identificar, Proteger, Detectar, Responder y Recuperar ante incidentes de fraude digital.</p>
-                </div>
-                <div class="standard-box">
-                    <h4>Ley 30096</h4>
-                    <p style="font-size: 0.9rem; color: var(--text-dim);">Marco legal peruano para delitos informáticos, estableciendo penas severas para la interceptación y el fraude.</p>
-                </div>
-            </div>
+            <table class="mule-table">
+                <thead>
+                    <tr>
+                        <th>Nombre Completo</th>
+                        <th>DNI</th>
+                        <th>Sistema / Nodo</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td style="font-weight: 600;">NATALIA VIVAS VILLACORTA</td>
+                        <td>4273****</td>
+                        <td>Plin (Interbank)</td>
+                    </tr>
+                    <tr>
+                        <td style="font-weight: 600;">Elizabeth Violeta Castillo Huaman</td>
+                        <td>4633****</td>
+                        <td>Plin (BBVA/Inter)</td>
+                    </tr>
+                    <tr>
+                        <td style="font-weight: 600;">Ydrogo Rodriguez Bruno Anthony</td>
+                        <td>7404****</td>
+                        <td>Fin. Efectiva / 7 Líneas Móviles</td>
+                    </tr>
+                    <tr>
+                        <td style="font-weight: 600;">Fernando Aldair Mendoza Arica</td>
+                        <td>6120****</td>
+                        <td>Yape (BCP / Est. UNS)</td>
+                    </tr>
+                </tbody>
+            </table>
+            <p style="margin-top: 2rem; color: var(--accent); font-size: 0.8rem; font-weight: 600;">* Toda esta información ha sido derivada a la DIVINDAT bajo la Ley 30096 (Delitos Informáticos).</p>
         </section>
 
-        <section class="case-study">
-            <h2>Caso de Estudio: Red de Cuentas Mula (Chimbote 2026)</h2>
-            <p style="color: var(--text-dim); margin-bottom: 2rem;">Identidades detectadas utilizando perfiles laborales reales para enmascarar actividades de lavado de fondos.</p>
-            <div class="mule-list">
-                <div class="mule-item">
-                    <span>Fernando Aldair Mendoza A.</span>
-                    <span style="color: var(--text-dim);">DNI 6120**** | Nodo Yape</span>
-                </div>
-                <div class="mule-item">
-                    <span>Elizabeth Violeta Castillo H.</span>
-                    <span style="color: var(--text-dim);">DNI 4633**** | Nodo Plin</span>
-                </div>
-                <div class="mule-item">
-                    <span>Ydrogo Rodriguez Bruno A.</span>
-                    <span style="color: var(--text-dim);">DNI 7404**** | Nodo Efec.</span>
-                </div>
+        <section class="section-padding" style="text-align: center;">
+            <h2>Herramientas de Análisis Externo</h2>
+            <p style="color: var(--text-dim); margin-top: 1rem;">Usa estos recursos profesionales para validar cualquier enlace sospechoso.</p>
+            <div class="tool-bar" style="justify-content: center;">
+                <a href="https://urlscan.io" target="_blank" class="btn-tool">urlscan.io</a>
+                <a href="https://www.virustotal.com" target="_blank" class="btn-tool">VirusTotal</a>
+                <a href="https://www.phishtank.com" target="_blank" class="btn-tool">PhishTank</a>
+                <a href="https://www.abuseipdb.com" target="_blank" class="btn-tool">AbuseIPDB</a>
             </div>
         </section>
 
     </main>
 
-    <footer>
+    <footer class="section-padding">
         <div class="container">
-            <p><strong>© 2026 Inteligencia Digital & Gestión de Seguridad</strong></p>
-            <p style="margin-top: 0.5rem; opacity: 0.6; font-size: 0.8rem;">La seguridad no es un producto, es un proceso de gobernanza continua.</p>
+            <p style="font-weight: 800; font-size: 1.2rem; color: var(--primary);">DEFENSA DIGITAL</p>
+            <p style="margin-top: 1rem; color: var(--text-dim);">La ciberseguridad es una responsabilidad compartida. Educa y protégete.</p>
         </div>
     </footer>
 
+    <script>
+        // Matrix Rain Animation
+        const canvas = document.getElementById('matrix-canvas');
+        const ctx = canvas.getContext('2d');
+
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+
+        const letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ123456789@#$%^&*()*&^%";
+        const fontSize = 16;
+        const columns = canvas.width / fontSize;
+
+        const drops = [];
+        for (let i = 0; i < columns; i++) {
+            drops[i] = 1;
+        }
+
+        function draw() {
+            ctx.fillStyle = "rgba(0, 0, 0, 0.05)";
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+            ctx.fillStyle = "#0F0";
+            ctx.font = fontSize + "px arial";
+
+            for (let i = 0; i < drops.length; i++) {
+                const text = letters.charAt(Math.floor(Math.random() * letters.length));
+                ctx.fillText(text, i * fontSize, drops[i] * fontSize);
+
+                if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
+                    drops[i] = 0;
+                }
+                drops[i]++;
+            }
+        }
+
+        setInterval(draw, 33);
+
+        window.addEventListener('resize', () => {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        });
+    </script>
 </body>
 </html>
