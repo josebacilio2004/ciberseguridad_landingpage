@@ -49,9 +49,9 @@ function initTypewriter() {
     const body = document.getElementById('terminal-body');
     if (!body) return;
     const lines = [
-        { text: "[OK] Protocolo de seguridad v2.0 activo.", color: "#0f0" },
-        { text: "[OK] Base de datos forense sincronizada.", color: "#0f0" },
-        { text: "[!] Iniciando motor de detección interactiva.", color: "#ff0" }
+        { text: "[OK] Protocolo de seguridad cargado.", color: "#0f0" },
+        { text: "[OK] Escaneo de IPs regionales activado.", color: "#0f0" },
+        { text: "[!] Alerta: Red Criminal identificada.", color: "#ff0" }
     ];
     let lIdx = 0, cIdx = 0;
 
