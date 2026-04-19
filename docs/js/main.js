@@ -1,14 +1,31 @@
 /**
- * Main Intelligence Logic v2.0
+ * Main Intelligence Logic v3.0
  */
 
 document.addEventListener('DOMContentLoaded', () => {
     initMatrix();
     initTypewriter();
     initSearch();
-    initSimulator();
-    initCharts();
+    initPanic();
+    initMap();
 });
+
+// --- Panic Button Toggle ---
+window.togglePanic = function() {
+    const modal = document.getElementById('panic-modal');
+    if (!modal) return;
+    modal.style.display = (modal.style.display === 'flex') ? 'none' : 'flex';
+};
+
+function initPanic() {
+    // Escuchar tecla ESC para cerrar modal
+    window.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') {
+            const modal = document.getElementById('panic-modal');
+            if (modal) modal.style.display = 'none';
+        }
+    });
+}
 
 // --- Matrix Rain Animation ---
 function initMatrix() {
@@ -39,6 +56,8 @@ function initMatrix() {
             drops[i]++;
         }
     }
+    
+    // Low FPS for mobile
     const interval = window.innerWidth < 768 ? 50 : 35;
     setInterval(draw, interval);
     window.addEventListener('resize', setup);
@@ -49,8 +68,8 @@ function initTypewriter() {
     const body = document.getElementById('terminal-body');
     if (!body) return;
     const lines = [
-        { text: "[OK] Protocolo de seguridad cargado.", color: "#0f0" },
-        { text: "[OK] Escaneo de IPs regionales activado.", color: "#0f0" },
+        { text: "[OK] Protocolo de defensa v3.0 activo.", color: "#0f0" },
+        { text: "[OK] Escaneo de IPs regionales activo.", color: "#0f0" },
         { text: "[!] Alerta: Red Criminal identificada.", color: "#ff0" }
     ];
     let lIdx = 0, cIdx = 0;
@@ -90,95 +109,56 @@ function initSearch() {
 
         const results = INVESTIGADORES_DB.filter(item => 
             item.nombre.toLowerCase().includes(query) || 
-            item.dni.includes(query) ||
-            item.plataforma.toLowerCase().includes(query)
+            item.dni.includes(query)
         );
 
         if (results.length === 0) {
-            container.innerHTML = '<p style="color: var(--accent);">No se encontraron registros en la base de datos de inteligencia.</p>';
+            container.innerHTML = '<p style="color: var(--accent);">No se encontraron registros de inteligencia.</p>';
             return;
         }
 
         results.forEach(res => {
             const card = document.createElement('div');
-            card.className = 'result-card fade-in';
+            card.className = 'result-card';
             card.innerHTML = `
                 <h4 style="color: var(--secondary);">${res.nombre}</h4>
-                <p style="font-size: 0.8rem; margin: 0.5rem 0;"><strong>DNI:</strong> ${res.dni} | <strong>Riesgo:</strong> <span style="color: var(--accent);">${res.riesgo}</span></p>
-                <p style="font-size: 0.9rem; color: var(--text-dim);">${res.detalle}</p>
-                <p style="font-size: 0.8rem; margin-top: 0.5rem; border-top: 1px solid var(--border); padding-top: 0.5rem;"><strong>Nodo:</strong> ${res.plataforma} | <strong>Origen:</strong> ${res.ubicacion}</p>
+                <p style="font-size: 0.8rem; margin: 0.4rem 0;"><strong>DNI:</strong> ${res.dni} | <strong>Riesgo:</strong> ${res.riesgo}</p>
+                <p style="font-size: 0.8rem; color: var(--text-dim);">${res.detalle}</p>
             `;
             container.appendChild(card);
         });
     });
 }
 
-// --- Cyber-Gym Simulator ---
-function initSimulator() {
-    const container = document.getElementById('sim-content');
-    if (!container) return;
+// --- Geographic Map (Leaflet) ---
+function initMap() {
+    const mapDiv = document.getElementById('map');
+    if (!mapDiv) return;
 
-    const scenarios = [
-        {
-            text: "Recibes un mensaje de AliExpress indicando que ganaste S/ 1,000 pero debes pagar S/ 50 de comisión. ¿Qué haces?",
-            options: [
-                { text: "Pagar, es solo una comisión pequeña.", correct: false, feedback: "ERROR: Has caído en una estafa de pago previo." },
-                { text: "Ignorar y bloquear al remitente.", correct: true, feedback: "CORRECTO: AliExpress nunca pide comisiones por fuera de su app." }
-            ]
-        },
-        {
-            text: "Un 'asesor financiero' te pide capturas de tu saldo bancario para 'validar tu perfil'. ¿Lo envías?",
-            options: [
-                { text: "Sí, es para validar mi cuenta.", correct: false, feedback: "ERROR: Nunca compartas saldos bancarios; les ayuda a dimensionar el robo." },
-                { text: "No, es información sensible.", correct: true, feedback: "CORRECTO: La ingeniería social busca conocer tu capacidad económica." }
-            ]
-        }
+    // Inicializar mapa centrado en Perú
+    const map = L.map('map').setView([-9.19, -75.01], 5);
+
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '&copy; OpenStreetMap contributors'
+    }).addTo(map);
+
+    // Nodos Críticos Detectados
+    const nodes = [
+        { name: "Epicentro: Red Chimbote", coords: [-9.07, -78.59], color: "red" },
+        { name: "Alerta: Transacciones Lima", coords: [-12.04, -77.03], color: "orange" },
+        { name: "Alerta: Nodo Trujillo", coords: [-8.11, -79.03], color: "orange" }
     ];
 
-    let current = 0;
-    function render() {
-        if (current >= scenarios.length) {
-            container.innerHTML = '<h3 style="color: var(--secondary);">Simulación Completada: Resiliencia Digital Máxima</h3><button class="btn btn-primary" onclick="location.reload()" style="margin-top: 2rem;">Reiniciar Entrenamiento</button>';
-            return;
-        }
-        const s = scenarios[current];
-        container.innerHTML = `
-            <p style="font-size: 1.2rem; margin-bottom: 2rem;">${s.text}</p>
-            <div class="sim-choice">
-                ${s.options.map((o, i) => `<button class="btn ${i === 0 ? 'btn-primary' : 'btn-accent'}" onclick="handleSim(${o.correct}, '${o.feedback}')">${o.text}</button>`).join('')}
-            </div>
-        `;
-    }
-
-    window.handleSim = (correct, feedback) => {
-        alert(feedback);
-        if (correct) current++;
-        render();
-    };
-
-    render();
-}
-
-// --- Charts ---
-function initCharts() {
-    const ctx = document.getElementById('intelChart');
-    if (!ctx) return;
-
-    new Chart(ctx, {
-        type: 'doughnut',
-        data: {
-            labels: ['Phishing SMS', 'Ingeniería Social', 'SIM Swapping', 'Otros'],
-            datasets: [{
-                data: [45, 25, 20, 10],
-                backgroundColor: ['#3b82f6', '#10b981', '#f43f5e', '#6366f1'],
-                borderWidth: 0
-            }]
-        },
-        options: {
-            responsive: true,
-            plugins: {
-                legend: { position: 'bottom', labels: { color: '#fff' } }
-            }
-        }
+    nodes.forEach(node => {
+        const marker = L.circleMarker(node.coords, {
+            radius: 12,
+            fillColor: node.color,
+            color: "#fff",
+            weight: 2,
+            opacity: 1,
+            fillOpacity: 0.8
+        }).addTo(map);
+        
+        marker.bindPopup(`<strong>${node.name}</strong><br>Estado: Inteligencia Activa`);
     });
 }

@@ -3,14 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Defensa Digital | Portal de Inteligencia de Ciberseguridad</title>
+    <title>Defensa Digital Avanzada | Portal de Inteligencia</title>
     <link rel="icon" id="favicon-link" type="image/png" href="favicon-removebg-preview.png">
     
     <!-- Fonts & CDNs -->
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
-
+    
     <!-- Project Styles -->
     <link rel="stylesheet" href="css/style.css">
 </head>
@@ -18,22 +16,22 @@
 
     <canvas id="matrix-canvas"></canvas>
 
-    <!-- HERO ORIGINAL RESTAURADO -->
+    <!-- HERO ORIGINAL RESTAURADO + ENLACE A LABORATORIO -->
     <header class="hero">
         <div class="hero-content container">
             <div class="hero-text">
                 <div class="terminal">
-                    <div class="terminal-header">> INTEL-SYS VERSION 4.0.1 [RESTAURADO]</div>
+                    <div class="terminal-header">> INTEL-SYS VERSION 4.0.1 [PROTECCIÓN ACTIVA]</div>
                     <div id="terminal-body">
-                        <!-- Texto cargado por JavaScript para efecto typewriter -->
+                        <!-- Typewriter -->
                     </div>
                 </div>
                 <h1 class="glitch-text" data-text="Defensa Digital Avanzada">Defensa Digital Avanzada</h1>
                 <p class="hero-sub">Portal dinámico de ciberseguridad. Análisis de riesgos, mapeo forense de estafas y gobernanza proactiva para la era digital.</p>
                 <div class="tool-bar">
                     <a href="#analisis" class="btn-tool">Análisis Técnico</a>
-                    <a href="#amenazas" class="btn-tool" style="border-color: var(--secondary); color: var(--secondary);">Nuevas Amenazas</a>
                     <a href="#casos" class="btn-tool" style="border-color: var(--accent); color: var(--accent);">Base de Casos</a>
+                    <a href="analisis.html" class="btn-tool" style="border-color: var(--secondary); color: var(--secondary); background: rgba(16, 185, 129, 0.1);">Laboratorio Forense v3.0 →</a>
                 </div>
             </div>
             <div class="hero-image">
@@ -43,30 +41,30 @@
     </header>
 
     <main>
-        <!-- SECCIÓN 1: ANATOMÍA (RESTAURADO) -->
+        <!-- SECCIÓN 1: ANATOMÍA -->
         <section id="analisis" class="section-padding container">
             <h2 class="section-title">1. Anatomía del Ataque</h2>
-            <p class="section-desc">Entiende cómo los atacantes logran burlar tus defensas iniciales usando tecnología y psicología digital avanzada.</p>
+            <p class="section-desc">Entiende cómo los atacantes logran burlar tus defensas iniciales.</p>
             <div class="card-grid">
                 <div class="card">
                     <img src="assets/phishing.png" alt="Phishing Hook" loading="lazy">
                     <h3>Vectores de Phishing</h3>
-                    <p>Los atacantes usan <strong>Dominios Homógrafos</strong> y redirecciones encadenadas para saltar filtros de correo y SMS. Los dominios tienen una vida útil menor a 7 días.</p>
+                    <p>Los atacantes usan <strong>Dominios Homógrafos</strong> y redirecciones encadenadas para saltar filtros de correo y SMS.</p>
                 </div>
                 <div class="card">
                     <img src="assets/social.png" alt="Ingeniería Social" loading="lazy">
                     <h3>Ingeniería Social</h3>
-                    <p>Se basan en el principio de <strong>Autoridad y Urgencia</strong>. Te contactan "asesores" con perfiles profesionales para generar una falsa cercanía y familiaridad.</p>
+                    <p>Se basan en el principio de <strong>Autoridad y Urgencia</strong>. Te contactan "asesores" con perfiles profesionales falsos.</p>
                 </div>
                 <div class="card">
                     <img src="assets/balance.png" alt="Manipulación de Saldo" loading="lazy">
                     <h3>Manipulación de Saldo</h3>
-                    <p>Las plataformas simulan un dashboard de ganancias. Ves números subir, pero es solo código visual sin respaldo financiero real. El dinero real ya fue desviado.</p>
+                    <p>Las plataformas simulan un dashboard de ganancias inexistente para incentivar reinversiones.</p>
                 </div>
             </div>
         </section>
 
-        <!-- SECCIÓN 2: CUMPLIMIENTO (RESTAURADO) -->
+        <!-- SECCIÓN 2: CUMPLIMIENTO -->
         <section id="compliance" class="container">
             <div class="compliance">
                 <div style="display: flex; gap: 3rem; align-items: center; flex-wrap: wrap;">
@@ -77,15 +75,15 @@
                         <h2 class="section-title" style="color: white;">Gobernanza y Estándares</h2>
                         <p style="color: rgba(255,255,255,0.7); margin-bottom: 2rem;">Basado en las mejores prácticas de la industria global para la resiliencia digital.</p>
                         <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem;">
-                            <div><strong style="color: var(--secondary);">ISO 27001</strong><p style="font-size: 0.8rem;">Control de activos y factor humano.</p></div>
-                            <div><strong style="color: var(--secondary);">COBIT 2019</strong><p style="font-size: 0.8rem;">Gobernanza de riesgos de TI.</p></div>
+                            <div><strong style="color: var(--secondary);">ISO 27001</strong><p style="font-size: 0.8rem;">Control de activos.</p></div>
+                            <div><strong style="color: var(--secondary);">COBIT 2019</strong><p style="font-size: 0.8rem;">Gobernanza de TI.</p></div>
                         </div>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- SECCIÓN 3: CASOS CHIMBOTE (RESTAURADO) -->
+        <!-- SECCIÓN 3: CASOS CHIMBOTE -->
         <section id="casos" class="section-padding container">
             <div class="case-header">Inteligencia de Campo: Red de Chimbote</div>
             <h2 class="section-title">Mapa de Cuentas Mula</h2>
@@ -94,87 +92,43 @@
                     <thead>
                         <tr>
                             <th>Nombre Completo</th>
-                            <th>Identificador (DNI)</th>
+                            <th>DNI</th>
                             <th>Entidad / Rol</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr><td><strong>NATALIA VIVAS VILLACORTA</strong></td><td>42730107</td><td>Plin (Interbank) - Recaudación</td></tr>
-                        <tr><td><strong>ELIZABETH VIOLETA CASTILLO</strong></td><td>46338438</td><td>Plin (BBVA) - Dispersión</td></tr>
-                        <tr><td><strong>YDROGO RODRIGUEZ BRUNO</strong></td><td>74044179</td><td>Fin. Efectiva - Infraestructura</td></tr>
-                        <tr><td><strong>FERNANDO ALDAIR MENDOZA</strong></td><td>61208643</td><td>Yape (BCP) - Retirada</td></tr>
+                        <tr><td><strong>NATALIA VIVAS VILLACORTA</strong></td><td>42730107</td><td>Plin (Interbank)</td></tr>
+                        <tr><td><strong>ELIZABETH VIOLETA CASTILLO</strong></td><td>46338438</td><td>Plin (BBVA)</td></tr>
+                        <tr><td><strong>YDROGO RODRIGUEZ BRUNO</strong></td><td>74044179</td><td>Fin. Efectiva</td></tr>
+                        <tr><td><strong>FERNANDO ALDAIR MENDOZA</strong></td><td>61208643</td><td>Yape (BCP)</td></tr>
                     </tbody>
                 </table>
             </div>
         </section>
-
-        <!-- ZONA DE INTELIGENCIA AVANZADA (v2.0 INTEGRADA) -->
-        <section id="v2-tools" class="intelligence-zone">
-            <div class="container">
-                <div style="text-align: center; margin-bottom: 4rem;">
-                    <span class="case-header" style="border-left: none; padding-left: 0; display: block; margin-bottom: 1rem;">MÓDULO DE EXPERTO V2.0</span>
-                    <h2 class="section-title">Herramientas de Inteligencia Avanzada</h2>
-                    <p class="section-desc" style="margin: 0 auto;">Explora el buscador forense, entrena en el simulador o genera reportes oficiales.</p>
-                </div>
-
-                <div class="card-grid" style="grid-template-columns: 1.5fr 1fr; align-items: start;">
-                    <!-- Buscador -->
-                    <div class="search-container" style="background: rgba(0,0,0,0.5);">
-                        <h3>Buscador de Identidades</h3>
-                        <p style="font-size: 0.9rem; color: var(--text-dim); margin-bottom: 1.5rem;">Consulta en tiempo real nuestra base de datos de sospechosos.</p>
-                        <input type="text" id="forensic-search" class="search-input" placeholder="Ingresa nombre, DNI o banco...">
-                        <div id="search-results" class="search-results">
-                            <p style="color: var(--text-dim); text-align: center;">Resultados de inteligencia aparecerán aquí.</p>
-                        </div>
-                    </div>
-                    
-                    <!-- Stats Chart -->
-                    <div class="card" style="background: rgba(0,0,0,0.5); border-color: var(--primary);">
-                        <h3>Estadísticas de Riesgo</h3>
-                        <canvas id="intelChart" style="max-width: 100%; margin-top: 1.5rem;"></canvas>
-                    </div>
-                </div>
-
-                <div class="card-grid" style="margin-top: 2rem;">
-                    <!-- Simulador -->
-                    <div class="sim-container" style="background: rgba(15, 15, 18, 0.8);">
-                        <h3 style="margin-bottom: 1.5rem; color: var(--secondary);">Cyber-Gym: Simulador de Amenazas</h3>
-                        <div id="sim-content">
-                            <!-- JS loaded -->
-                        </div>
-                    </div>
-
-                    <!-- Report Builder -->
-                    <div class="search-container" style="background: rgba(15, 15, 18, 0.8); border-color: var(--accent);">
-                        <h3 style="color: var(--accent); margin-bottom: 1rem;">Generador de Denuncia Formal</h3>
-                        <div style="display: grid; gap: 1rem;">
-                            <input type="text" id="rep-victima" class="search-input" placeholder="Tu nombre...">
-                            <input type="number" id="rep-monto" class="search-input" placeholder="Monto comprometido (Soles)...">
-                            <input type="text" id="rep-sospechoso" class="search-input" placeholder="Nombre completo del sospechoso...">
-                            <textarea id="rep-desc" class="search-input" style="height: 100px;" placeholder="Detalles técnicos..."></textarea>
-                            <button class="btn btn-accent" style="width: 100%; border: none; cursor: pointer;" onclick="downloadDenunciaPDF()">DESCARGAR REPORTE (PDF)</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
     </main>
 
     <footer class="section-padding" style="background: #000; border-top: 1px solid var(--border); text-align: center;">
         <div class="container">
             <p style="font-weight: 800; font-size: 1.2rem; color: var(--primary); letter-spacing: 3px;">DEFENSA DIGITAL 2.0</p>
-            <div style="margin-top: 2rem; display: flex; justify-content: center; gap: 2rem; font-size: 0.8rem; color: var(--text-dim); flex-wrap: wrap;">
-                <span>urlscan.io</span>
-                <span>VirusTotal</span>
-                <span>AbuseIPDB</span>
-            </div>
+            <p style="margin-top: 1rem; color: var(--text-dim); font-size: 0.8rem;">Investigación de Inteligencia Forense © 2026</p>
         </div>
     </footer>
 
-    <!-- Scripts Integration -->
-    <script src="js/investigadores_db.js"></script>
-    <script src="js/pdf_generator.js"></script>
+    <!-- PANIC BUTTON -->
+    <div class="panic-btn" onclick="togglePanic()">!</div>
+    <div id="panic-modal">
+        <div class="modal-content">
+            <h2 style="color: var(--accent); margin-bottom: 1.5rem;">PROTOCOLOS DE EMERGENCIA</h2>
+            <div style="text-align: left; color: var(--text-dim);">
+                <p><strong>1. BLOQUEO:</strong> Llama a tu banco de inmediato y congela cuentas/tarjetas.</p>
+                <p><strong>2. EVIDENCIA:</strong> Captura chats y comprobantes. NO los borres.</p>
+                <p><strong>3. DENUNCIA:</strong> Usa el generador de PDF en el <strong>Laboratorio Forense</strong>.</p>
+            </div>
+            <button class="btn btn-primary" style="margin-top: 2rem;" onclick="togglePanic()">CERRAR ALERTA</button>
+        </div>
+    </div>
+
+    <!-- Scripts -->
     <script src="js/main.js"></script>
 </body>
 </html>
