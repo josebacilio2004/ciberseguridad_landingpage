@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Laboratorio Forense | Defensa Digital Avanzada</title>
+    <title>Laboratorio Forense v4.0 | Defensa Digital Avanzada</title>
     <link rel="icon" type="image/png" href="favicon-removebg-preview.png">
     
     <!-- Fonts & CDNs -->
@@ -19,10 +19,12 @@
         #map { height: 400px; border-radius: 20px; border: 1px solid var(--border); margin-top: 1rem; }
         .lab-header { margin-bottom: 4rem; text-align: left; border-left: 5px solid var(--secondary); padding-left: 1.5rem; }
         .drop-zone { 
-            border: 2px dashed var(--border); border-radius: 20px; padding: 3rem; 
+            border: 2px dashed var(--border); border-radius: 20px; padding: 2.5rem; 
             text-align: center; cursor: pointer; transition: 0.3s; background: rgba(255,255,255,0.02);
+            margin-bottom: 1rem;
         }
         .drop-zone:hover { border-color: var(--secondary); background: rgba(16, 185, 129, 0.05); }
+        .v4-badge { background: var(--accent); color: white; padding: 2px 8px; border-radius: 4px; font-size: 0.6rem; vertical-align: middle; margin-left: 5px; }
     </style>
 </head>
 <body>
@@ -33,50 +35,72 @@
         <a href="index.html" class="btn-tool" style="margin-bottom: 2rem; display: inline-block;">← Volver al Portal Académico</a>
         
         <header class="lab-header">
-            <h1 style="font-size: 3rem; margin-bottom: 0.5rem;">Laboratorio Forense v3.0</h1>
-            <p style="color: var(--secondary); font-family: 'JetBrains Mono';">MODO INVESTIGADOR: ACTIVO // NIVEL DE ACCESO: TOTAL</p>
+            <h1 style="font-size: 3rem; margin-bottom: 0.5rem;">Laboratorio Forense v4.0 <span class="v4-badge">ULTRA</span></h1>
+            <p style="color: var(--secondary); font-family: 'JetBrains Mono';">HERRAMIENTAS DE CUSTODIA Y REPUTACIÓN DIGITAL ACTIVADAS</p>
         </header>
 
         <main>
-            <div class="card-grid" style="grid-template-columns: 1.2fr 1fr; margin-bottom: 3rem;">
-                <!-- ESCÁNER QR -->
+            <!-- FILA 1: QR & MAPA -->
+            <div class="card-grid" style="grid-template-columns: 1.2fr 1fr; margin-bottom: 2rem;">
                 <section class="card" style="border-color: var(--secondary);">
-                    <h2 style="color: var(--secondary); margin-bottom: 1.5rem;">1. Escáner de QR Forense</h2>
-                    <p style="margin-bottom: 2rem;">Sube la captura de un código QR sospechoso (Yape, Plin o URLs) para extraer su metadata oculta.</p>
+                    <h2 style="color: var(--secondary); margin-bottom: 1rem;">1. Escáner de QR Forense</h2>
                     <div class="drop-zone" onclick="document.getElementById('qr-input').click()">
-                        <p id="qr-status">Haz clic o arrastra una imagen aquí</p>
+                        <p id="qr-status">Subir captura de QR (Yape/Plin)</p>
                         <input type="file" id="qr-input" hidden accept="image/*">
                     </div>
-                    <div id="qr-result" style="margin-top: 1.5rem; display: none; padding: 1.5rem; background: #000; border-radius: 12px; border: 1px solid var(--secondary);">
-                        <!-- Resultados -->
-                    </div>
+                    <div id="qr-result" style="display: none; padding: 1rem; background: #000; border-radius: 12px; border: 1px solid var(--secondary);"></div>
                 </section>
 
-                <!-- MAPA DE CALOR -->
                 <section class="card" style="border-color: var(--accent);">
-                    <h2 style="color: var(--accent); margin-bottom: 1.5rem;">2. Mapa Geográfico de Nodos</h2>
-                    <p>Visualización en tiempo real de los epicentros de la red criminal detectada.</p>
+                    <h2 style="color: var(--accent); margin-bottom: 1rem;">2. Mapa Geográfico</h2>
                     <div id="map"></div>
                 </section>
             </div>
 
-            <!-- BUSCADOR MIGRADO -->
+            <!-- FILA 2: CERTIFICADOR & DETECTIVE (NUEVO v4.0) -->
+            <div class="card-grid" style="grid-template-columns: 1fr 1.2fr; margin-bottom: 2rem;">
+                <!-- CERTIFICADOR DE EVIDENCIA -->
+                <section class="card" style="border-color: #eab308;">
+                    <h2 style="color: #eab308; margin-bottom: 1rem;">3. Certificador de Evidencia (Hash)</h2>
+                    <p style="font-size: 0.85rem; margin-bottom: 1.5rem;">Genera una huella digital (SHA-256) irrefutable para tus screenshots de estafa.</p>
+                    <div class="drop-zone" style="border-color: #eab30822;" onclick="document.getElementById('vault-input').click()">
+                        <p id="vault-status">Subir archivo para certificar</p>
+                        <input type="file" id="vault-input" hidden>
+                    </div>
+                    <div id="vault-result" style="display: none; padding: 1rem; background: rgba(0,0,0,0.4); border-radius: 12px; border: 1px solid #eab308;">
+                        <p style="font-size: 0.7rem; color: #eab308; margin-bottom: 0.5rem;">HASH SHA-256 CALCULADO:</p>
+                        <code id="hash-output" style="word-break: break-all; font-size: 0.8rem; color: #fff;"></code>
+                        <button class="btn btn-primary" style="width: 100%; margin-top: 1rem; background: #eab308; color: #000;" onclick="downloadCertificate()">DESCARGAR ACTA OFICIAL (PDF)</button>
+                    </div>
+                </section>
+
+                <!-- DETECTIVE DE ENLACES -->
+                <section class="card" style="border-color: #6366f1;">
+                    <h2 style="color: #6366f1; margin-bottom: 1rem;">4. Detective de Enlaces Phishing</h2>
+                    <p style="font-size: 0.85rem; margin-bottom: 1.5rem;">Analiza la reputación y patrones de riesgo de una URL sospechosa.</p>
+                    <input type="text" id="domain-input" class="search-input" placeholder="https://ejemplo-estafa.top" style="border-color: #6366f144;">
+                    <div id="domain-result" style="margin-top: 1rem; min-height: 100px;">
+                        <p style="color: var(--text-dim); text-align: center; font-size: 0.8rem;">Ingrese una URL para iniciar análisis de heurística.</p>
+                    </div>
+                </section>
+            </div>
+
+            <!-- FILA 3: BUSCADOR & REPORTE -->
             <div class="card-grid" style="grid-template-columns: 1fr 1fr;">
-                <section class="search-container" style="background: rgba(0,0,0,0.5);">
-                    <h2 style="margin-bottom: 1.5rem;">3. Buscador de Inteligencia</h2>
-                    <input type="text" id="forensic-search" class="search-input" placeholder="DNI, Nombre o Banco...">
+                <section class="search-container">
+                    <h2 style="margin-bottom: 1rem;">5. Buscador de Inteligencia</h2>
+                    <input type="text" id="forensic-search" class="search-input" placeholder="DNI o Nombre...">
                     <div id="search-results" class="search-results"></div>
                 </section>
 
-                <!-- REPORT GENERATOR MIGRADO -->
-                <section class="search-container" style="background: rgba(0,0,0,0.5); border-color: var(--accent);">
-                    <h2 style="color: var(--accent); margin-bottom: 1.5rem;">4. Generador de Denuncia PDF</h2>
+                <section class="search-container" style="border-color: var(--accent);">
+                    <h2 style="color: var(--accent); margin-bottom: 1rem;">6. Generador de Denuncia</h2>
                     <div style="display: grid; gap: 1rem;">
                         <input type="text" id="rep-victima" class="search-input" placeholder="Tu nombre...">
                         <input type="number" id="rep-monto" class="search-input" placeholder="Monto (Soles)...">
-                        <input type="text" id="rep-sospechoso" class="search-input" placeholder="Identidad del sospechoso...">
-                        <textarea id="rep-desc" class="search-input" style="height: 100px;" placeholder="Descripción del fraude..."></textarea>
-                        <button class="btn btn-accent" style="width: 100%; border: none; cursor: pointer;" onclick="downloadDenunciaPDF()">DESCARGAR REPORTE FORMAL</button>
+                        <input type="text" id="rep-sospechoso" class="search-input" placeholder="Nombre sospechoso...">
+                        <textarea id="rep-desc" class="search-input" style="height: 80px;" placeholder="Descripción..."></textarea>
+                        <button class="btn btn-accent" style="width: 100%;" onclick="downloadDenunciaPDF()">DESCARGAR DENUNCIA</button>
                     </div>
                 </section>
             </div>
@@ -89,9 +113,9 @@
         <div class="modal-content">
             <h2 style="color: var(--accent); margin-bottom: 1.5rem;">PROTOCOLOS DE EMERGENCIA</h2>
             <div style="text-align: left; color: var(--text-dim);">
-                <p><strong>1. BLOQUEO:</strong> Llama a tu banco de inmediato y congela cuentas/tarjetas.</p>
-                <p><strong>2. EVIDENCIA:</strong> Captura chats y comprobantes. NO los borres.</p>
-                <p><strong>3. DENUNCIA:</strong> Usa el generador de PDF de este portal y llévalo a la DIVINDAT.</p>
+                <p><strong>1. BLOQUEO:</strong> Congela tus cuentas bancarias.</p>
+                <p><strong>2. EVIDENCIA:</strong> No borres los chats. Úsalos en el Certificador v4.0.</p>
+                <p><strong>3. DENUNCIA:</strong> Lleva el acta y la denuncia a la DIVINDAT.</p>
             </div>
             <button class="btn btn-primary" style="margin-top: 2rem;" onclick="togglePanic()">CERRAR ALERTA</button>
         </div>
@@ -100,6 +124,8 @@
     <script src="js/investigadores_db.js"></script>
     <script src="js/pdf_generator.js"></script>
     <script src="js/qr_scanner.js"></script>
+    <script src="js/evidence_vault.js"></script>
+    <script src="js/domain_detective.js"></script>
     <script src="js/main.js"></script>
 </body>
 </html>
