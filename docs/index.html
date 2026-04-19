@@ -37,6 +37,7 @@
             height: 100%;
             z-index: -1;
             opacity: 0.12;
+            pointer-events: none;
         }
 
         /* --- Header / Hero --- */
@@ -45,7 +46,7 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            padding: 8rem 2rem 4rem;
+            padding: clamp(6rem, 15vh, 10rem) 1.5rem 4rem;
             position: relative;
         }
 
@@ -53,7 +54,7 @@
             max-width: 1200px;
             display: grid;
             grid-template-columns: 1.2fr 1fr;
-            gap: 4rem;
+            gap: clamp(2rem, 5vw, 4rem);
             align-items: center;
         }
 
@@ -62,17 +63,24 @@
         .terminal {
             background: #000;
             border-radius: 12px;
-            padding: 1rem;
+            padding: 1.25rem;
             font-family: 'JetBrains Mono', monospace;
             border: 1px solid var(--secondary);
             box-shadow: 0 0 20px rgba(16, 185, 129, 0.15);
             margin-bottom: 2rem;
             font-size: 0.85rem;
-            line-height: 1.4;
-            overflow-x: hidden;
+            line-height: 1.5;
+            overflow: hidden;
         }
 
-        .terminal-header { color: var(--secondary); margin-bottom: 1rem; border-bottom: 1px solid rgba(16, 185, 129, 0.3); padding-bottom: 0.5rem; }
+        .terminal-header { 
+            color: var(--secondary); 
+            margin-bottom: 1rem; 
+            border-bottom: 1px solid rgba(16, 185, 129, 0.3); 
+            padding-bottom: 0.5rem;
+            font-size: 0.75rem;
+            letter-spacing: 1px;
+        }
 
         h1 {
             font-size: clamp(2.5rem, 8vw, 4.5rem);
@@ -98,9 +106,10 @@
 
         .hero-image img {
             width: 100%;
+            max-width: 500px;
             border-radius: 24px;
             mask-image: linear-gradient(to bottom, black 80%, transparent);
-            box-shadow: 0 0 50px rgba(59, 130, 246, 0.1);
+            box-shadow: 0 0 50px rgba(59, 130, 246, 0.15);
         }
 
         /* --- Section Styling --- */
@@ -108,7 +117,7 @@
         .container { max-width: 1100px; margin: 0 auto; padding: 0 1.5rem; }
 
         .section-title { font-size: clamp(1.8rem, 5vw, 2.8rem); margin-bottom: 1rem; }
-        .section-desc { color: var(--text-dim); margin-bottom: 4rem; max-width: 600px; }
+        .section-desc { color: var(--text-dim); margin-bottom: 4rem; max-width: 650px; }
 
         .card-grid {
             display: grid;
@@ -118,18 +127,33 @@
 
         .card {
             background: var(--surface);
-            backdrop-filter: blur(10px);
-            padding: 2.5rem;
-            border-radius: 24px;
+            backdrop-filter: blur(12px);
+            padding: clamp(1.5rem, 5vw, 2.5rem);
+            border-radius: 28px;
             border: 1px solid var(--border);
-            transition: all 0.3s ease;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             height: 100%;
+            display: flex;
+            flex-direction: column;
         }
 
-        .card:hover { border-color: var(--primary); transform: translateY(-8px); background: rgba(255,255,255,0.02); }
-        .card img { width: 100%; border-radius: 16px; margin-bottom: 1.5rem; }
+        .card:hover { 
+            border-color: var(--primary); 
+            transform: translateY(-10px); 
+            background: rgba(255,255,255,0.03);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+        }
+
+        .card img { 
+            width: 100%; 
+            border-radius: 18px; 
+            margin-bottom: 1.5rem; 
+            aspect-ratio: 16/10;
+            object-fit: cover;
+        }
+
         .card h3 { font-size: 1.5rem; margin-bottom: 1rem; color: var(--primary); }
-        .card p { color: var(--text-dim); font-size: 0.95rem; }
+        .card p { color: var(--text-dim); font-size: 0.95rem; line-height: 1.6; }
 
         /* --- Tool Grid --- */
         .tool-bar {
@@ -140,38 +164,75 @@
         }
 
         .btn-tool {
-            background: rgba(255,255,255,0.03);
+            background: rgba(255,255,255,0.04);
             color: white;
-            padding: 0.8rem 1.5rem;
-            border-radius: 12px;
+            padding: 1rem 1.5rem;
+            border-radius: 14px;
             text-decoration: none;
             border: 1px solid var(--border);
             font-weight: 600;
             transition: 0.3s;
             font-size: 0.9rem;
             flex: 1;
-            min-width: 140px;
+            min-width: 160px;
             text-align: center;
         }
 
-        .btn-tool:hover { background: var(--primary); color: #000; border-color: var(--primary); transform: translateY(-3px); }
+        .btn-tool:hover { 
+            background: var(--primary); 
+            color: #000; 
+            border-color: var(--primary); 
+            transform: translateY(-4px); 
+            box-shadow: 0 10px 20px rgba(59, 130, 246, 0.2);
+        }
 
         /* --- Compliance Section --- */
         .compliance {
             background: linear-gradient(135deg, #1e3a8a 0%, #060b1a 100%);
-            padding: clamp(3rem, 10vw, 5rem);
-            border-radius: 32px;
+            padding: clamp(2rem, 8vw, 5rem);
+            border-radius: 36px;
             margin: 4rem 0;
-            border: 1px solid rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.08);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .compliance::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(59, 130, 246, 0.1) 0%, transparent 70%);
+            pointer-events: none;
         }
 
         /* --- Case Study --- */
-        .case-header { color: var(--accent); margin-bottom: 1.5rem; letter-spacing: 2px; text-transform: uppercase; font-size: 0.75rem; font-weight: 800; border-left: 3px solid var(--accent); padding-left: 1rem; }
+        .case-header { 
+            color: var(--accent); 
+            margin-bottom: 1.5rem; 
+            letter-spacing: 2px; 
+            text-transform: uppercase; 
+            font-size: 0.75rem; 
+            font-weight: 800; 
+            border-left: 3px solid var(--accent); 
+            padding-left: 1rem; 
+        }
         
-        .table-container { width: 100%; overflow-x: auto; margin-top: 2rem; border-radius: 16px; background: var(--surface); border: 1px solid var(--border); }
-        .mule-table { width: 100%; border-collapse: collapse; min-width: 600px; }
-        .mule-table th { text-align: left; padding: 1.2rem; color: var(--text-dim); font-size: 0.75rem; text-transform: uppercase; letter-spacing: 1px; }
-        .mule-table td { padding: 1.2rem; border-top: 1px solid var(--border); font-size: 0.9rem; }
+        .table-container { 
+            width: 100%; 
+            overflow-x: auto; 
+            margin-top: 2rem; 
+            border-radius: 20px; 
+            background: var(--surface); 
+            border: 1px solid var(--border);
+            -webkit-overflow-scrolling: touch;
+        }
+
+        .mule-table { width: 100%; border-collapse: collapse; min-width: 700px; }
+        .mule-table th { text-align: left; padding: 1.5rem; color: var(--text-dim); font-size: 0.75rem; text-transform: uppercase; letter-spacing: 1px; }
+        .mule-table td { padding: 1.5rem; border-top: 1px solid var(--border); font-size: 0.9rem; }
 
         /* --- Animations --- */
         @keyframes slideUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
@@ -181,13 +242,14 @@
         @media (max-width: 968px) {
             .hero-content { grid-template-columns: 1fr; text-align: center; }
             .hero-image { display: none; }
+            .hero-sub { margin-left: auto; margin-right: auto; }
             .tool-bar { justify-content: center; }
-            .compliance { flex-direction: column; text-align: center; }
+            .compliance > div { flex-direction: column; text-align: center; }
         }
 
         @media (max-width: 480px) {
             .container { padding: 0 1rem; }
-            .card { padding: 1.5rem; }
+            .card { padding: 1.75rem; }
             .btn-tool { width: 100%; min-width: 100%; }
         }
     </style>
@@ -201,8 +263,8 @@
             <div class="hero-text">
                 <div class="terminal">
                     <div class="terminal-header">> INTEL-SYS VERSION 4.0.1</div>
-                    <div id="terminal-body" style="font-family: 'JetBrains Mono', monospace;">
-                        <!-- El texto se cargará mediante JS -->
+                    <div id="terminal-body">
+                        <!-- Texto cargado por JavaScript para efecto typewriter -->
                     </div>
                 </div>
                 <h1>Defensa Digital Avanzada</h1>
@@ -214,7 +276,7 @@
                 </div>
             </div>
             <div class="hero-image">
-                <img src="assets/criminal.png" alt="Ciberdelincuente">
+                <img src="assets/criminal.png" alt="Ciberdelincuente" loading="eager">
             </div>
         </div>
     </header>
@@ -223,45 +285,45 @@
 
         <section id="analisis" class="section-padding">
             <h2 class="section-title">1. Vectores de Infección</h2>
-            <p class="section-desc">Entiende cómo los atacantes logran burlar tus defensas iniciales usando tecnología y psicología.</p>
+            <p class="section-desc">Entiende cómo los atacantes logran burlar tus defensas iniciales usando tecnología y psicología digital avanzada.</p>
             <div class="card-grid">
                 <div class="card">
-                    <img src="assets/phishing.png" alt="Phishing Hook">
+                    <img src="assets/phishing.png" alt="Phishing Hook" loading="lazy">
                     <h3>Anatomía de la URL</h3>
-                    <p>Los atacantes usan <strong>Dominios Homógrafos</strong> y redirecciones encadenadas. Una URL que parece AliExpress puede ser una máscara que oculta un servidor en un país sin leyes de ciberseguridad.</p>
+                    <p>Los atacantes usan <strong>Dominios Homógrafos</strong> y redirecciones encadenadas. Una URL que parece AliExpress puede ocultar servidores en jurisdicciones sin leyes de ciberseguridad.</p>
                 </div>
                 <div class="card">
-                    <img src="assets/social.png" alt="Social Engineering">
+                    <img src="assets/social.png" alt="Ingeniería Social" loading="lazy">
                     <h3>Ingeniería Social</h3>
-                    <p>Se basan en el principio de <strong>Autoridad y Urgencia</strong>. Te contactan "asesores" que usan fotos de perfil profesionales y nombres comunes para generar una falsa cercanía y familiaridad.</p>
+                    <p>Se basan en el principio de <strong>Autoridad y Urgencia</strong>. Usan perfiles falsos pero profesionales para generar una falsa cercanía y desarmar el juicio crítico de la víctima.</p>
                 </div>
                 <div class="card">
-                    <img src="assets/balance.png" alt="Manipulación de Saldo">
+                    <img src="assets/balance.png" alt="Manipulación de Saldo" loading="lazy">
                     <h3>Manipulación de Saldo</h3>
-                    <p>Las plataformas fraudulentas simulan un dashboard de ganancias. Ves números subir, pero es solo código visual (HTML/JS) sin respaldo financiero real. El dinero real ya salió a otra cuenta.</p>
+                    <p>Las plataformas simulan un dashboard de ganancias. Ves números subir, pero es solo código visual sin respaldo financiero. El dinero real ya fue desviado a cuentas externas.</p>
                 </div>
             </div>
         </section>
 
         <section id="amenazas" class="section-padding">
             <h2 class="section-title">2. Glosario de Amenazas Actuales</h2>
-            <p class="section-desc">La ciberdelincuencia evoluciona cada día. Aquí los métodos más usados en la región.</p>
+            <p class="section-desc">La ciberdelincuencia evoluciona cada día. Aquí los métodos más explotados en el ecosistema regional peruano.</p>
             <div class="card-grid">
                 <div class="card" style="border-top: 3px solid #6366f1;">
                     <h3>Smishing (SMS)</h3>
-                    <p>Mensajes de texto que notifican "bloqueos de cuenta" o "premios retenidos". Incluyen enlaces cortos que capturan tus claves de banca móvil en segundos.</p>
+                    <p>Mensajes de texto que notifican "bloqueos de cuenta" o "premios". Incluyen enlaces maliciosos para capturar datos de acceso a banca móvil.</p>
                 </div>
                 <div class="card" style="border-top: 3px solid #ec4899;">
                     <h3>SIM Swapping</h3>
-                    <p>El atacante duplica tu línea móvil para interceptar los códigos de verificación (OTP) que envían los bancos. Es la llave final para vaciar tus cuentas.</p>
+                    <p>Duplicación ilícita de tu línea móvil para interceptar códigos de verificación bancarios (OTP) y vaciar tus ahorros de forma remota.</p>
                 </div>
                 <div class="card" style="border-top: 3px solid #eab308;">
                     <h3>Vishing (Voz)</h3>
-                    <p>Llamadas automáticas o humanas que fingen ser el área de seguridad de tu banco. Buscan que "confirmes" tus datos o dictes un código de seguridad.</p>
+                    <p>Llamadas que fingen ser de tu banco. Buscan que confirmes datos sensibles o dictes códigos de seguridad mediante manipulación emocional.</p>
                 </div>
                 <div class="card" style="border-top: 3px solid #22c55e;">
                     <h3>Mulas Bancarias</h3>
-                    <p>Personas que, a cambio de una comisión, prestan sus cuentas para recibir dinero robado. Es el último eslabón del lavado de dinero digital.</p>
+                    <p>Cuentas de terceros usadas para recibir y lavar dinero robado. Son el eslabón final que dificulta el rastreo del flujo monetario criminal.</p>
                 </div>
             </div>
         </section>
@@ -269,27 +331,27 @@
         <section id="compliance" class="compliance">
             <div style="display: flex; gap: 3rem; align-items: center; flex-wrap: wrap;">
                 <div style="flex: 1; min-width: 280px;">
-                    <img src="assets/standards.png" alt="Shield Standards" style="width: 100%; border-radius: 20px; box-shadow: 0 10px 40px rgba(0,0,0,0.5);">
+                    <img src="assets/standards.png" alt="Shield Standards" loading="lazy" style="width: 100%; border-radius: 20px; box-shadow: 0 10px 40px rgba(0,0,0,0.5);">
                 </div>
                 <div style="flex: 1.5; min-width: 280px;">
                     <h2 class="section-title" style="color: white; margin-bottom: 1rem;">Gobernanza y Estándares</h2>
-                    <p style="color: rgba(255,255,255,0.7); margin-bottom: 2rem; font-size: 1rem;">Adoptar un marco de trabajo es la diferencia entre ser vulnerable y ser resiliente.</p>
-                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; text-align: left;">
+                    <p style="color: rgba(255,255,255,0.7); margin-bottom: 2rem; font-size: 1rem;">La resiliencia digital se construye sobre marcos de trabajo sólidos y globalmente reconocidos.</p>
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; text-align: left;">
                         <div>
-                            <strong style="color: var(--secondary); display: block; margin-bottom: 0.3rem;">ISO 27001</strong>
-                            <p style="font-size: 0.8rem; color: #cbd5e1;">Gestión de la confidencialidad y concienciación del staff.</p>
+                            <strong style="color: var(--secondary); display: block; margin-bottom: 0.4rem;">ISO 27001</strong>
+                            <p style="font-size: 0.85rem; color: #cbd5e1;">Controles de confidencialidad y planes de concienciación de seguridad.</p>
                         </div>
                         <div>
-                            <strong style="color: var(--secondary); display: block; margin-bottom: 0.3rem;">COBIT 2019</strong>
-                            <p style="font-size: 0.8rem; color: #cbd5e1;">Aseguramiento de metas de gobierno y valor de TI.</p>
+                            <strong style="color: var(--secondary); display: block; margin-bottom: 0.4rem;">COBIT 2019</strong>
+                            <p style="font-size: 0.85rem; color: #cbd5e1;">Aseguramiento de metas de gobierno y transparencia en TI.</p>
                         </div>
                         <div>
-                            <strong style="color: var(--secondary); display: block; margin-bottom: 0.3rem;">NIST CSF</strong>
-                            <p style="font-size: 0.8rem; color: #cbd5e1;">Detección temprana y respuesta ante incidentes.</p>
+                            <strong style="color: var(--secondary); display: block; margin-bottom: 0.4rem;">NIST CSF</strong>
+                            <p style="font-size: 0.85rem; color: #cbd5e1;">Marco integral para la identificación y respuesta ágil ante incidentes.</p>
                         </div>
                         <div>
-                            <strong style="color: var(--secondary); display: block; margin-bottom: 0.3rem;">PCI DSS</strong>
-                            <p style="font-size: 0.8rem; color: #cbd5e1;">Seguridad para el procesamiento de pagos con tarjetas.</p>
+                            <strong style="color: var(--secondary); display: block; margin-bottom: 0.4rem;">PCI DSS</strong>
+                            <p style="font-size: 0.85rem; color: #cbd5e1;">Seguridad Mandatoria para el procesamiento de pagos electrónicos.</p>
                         </div>
                     </div>
                 </div>
@@ -297,125 +359,90 @@
         </section>
 
         <section id="casos" class="section-padding">
-            <div class="case-header">Investigación de Inteligencia Exclusiva</div>
-            <h2 class="section-title">Reporte de Red Chimbote</h2>
-            <p class="section-desc">Identidades vinculadas a la dispersión de S/ 1,099.00 mediante sistemas de pago inmediato (Yape/Plin).</p>
+            <div class="case-header">Inteligencia de Campo: Investigación 2026</div>
+            <h2 class="section-title">Nodos de Dispersión: Chimbote</h2>
+            <p class="section-desc">Mapeo forense de identidades vinculadas a la dispersión de fondos sustraídos mediante plataformas de pago inmediato.</p>
             
             <div class="table-container">
                 <table class="mule-table">
                     <thead>
                         <tr>
                             <th>Nombre Completo</th>
-                            <th>Identificador (DNI)</th>
-                            <th>Entidad / Rol</th>
+                            <th>DNI Identificado</th>
+                            <th>Nodo de Operación</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr>
                             <td style="font-weight: 600;">NATALIA VIVAS VILLACORTA</td>
                             <td>42730107</td>
-                            <td>Plin (Interbank) - Recaudación</td>
+                            <td>Plin (Interbank) - Recaudación Primaria</td>
                         </tr>
                         <tr>
                             <td style="font-weight: 600;">Elizabeth Violeta Castillo Huaman</td>
                             <td>46338438</td>
-                            <td>Plin (BBVA/Inter) - Dispersión</td>
+                            <td>Plin (Ex-BBVA) - Dispersión Secundaria</td>
                         </tr>
                         <tr>
                             <td style="font-weight: 600;">Ydrogo Rodriguez Bruno Anthony</td>
                             <td>74044179</td>
-                            <td>Fin. Efectiva - 7 Líneas Móviles activas</td>
+                            <td>Fin. Efectiva - Soporte Multi-línea (7 chips)</td>
                         </tr>
                         <tr>
                             <td style="font-weight: 600;">Fernando Aldair Mendoza Arica</td>
                             <td>61208643</td>
-                            <td>Yape (BCP) - Nodo de retiro final</td>
+                            <td>Yape (BCP) - Nodo de Retirada Final</td>
                         </tr>
                     </tbody>
                 </table>
             </div>
-            <p style="margin-top: 1.5rem; color: var(--accent); font-size: 0.8rem; font-weight: 600; text-align: center;">DENEUNCIA RADICADA BAJO LEY 30096 (PERÚ)</p>
+            <p style="margin-top: 2rem; color: var(--accent); font-size: 0.8rem; font-weight: 800; text-align: center; letter-spacing: 1px;">DENUNCIA INTERPUESTA ANTE DIVINDAT (LEY 30096 - PERÚ)</p>
         </section>
 
-        <section class="section-padding" style="text-align: center; background: rgba(255,255,255,0.01); border-radius: 32px; border: 1px solid var(--border);">
-            <div class="container">
-                <h2 class="section-title">Caja de Herramientas del Analista</h2>
-                <p class="section-desc" style="margin: 0 auto 3rem;">Verifica cualquier enlace sospechoso en estas plataformas globales antes de interactuar.</p>
-                <div class="tool-bar" style="justify-content: center; max-width: 800px; margin: 3rem auto 0;">
+        <section class="section-padding" style="text-align: center;">
+            <div class="container" style="background: rgba(255,255,255,0.01); border-radius: 40px; padding: 4rem 2rem; border: 1px solid var(--border);">
+                <h2 class="section-title">Laboratorio de Análisis</h2>
+                <p class="section-desc" style="margin: 0 auto 3rem;">Inicia una auditoría de seguridad sobre cualquier recurso sospechoso antes de interactuar.</p>
+                <div class="tool-bar" style="justify-content: center; max-width: 900px; margin: 0 auto;">
                     <a href="https://urlscan.io" target="_blank" class="btn-tool">urlscan.io</a>
                     <a href="https://www.virustotal.com" target="_blank" class="btn-tool">VirusTotal</a>
                     <a href="https://www.phishtank.com" target="_blank" class="btn-tool">PhishTank</a>
                     <a href="https://www.abuseipdb.com" target="_blank" class="btn-tool">AbuseIPDB</a>
-                    <a href="https://haveibeenpwned.com" target="_blank" class="btn-tool">¿Fui hackeado?</a>
+                    <a href="https://haveibeenpwned.com" target="_blank" class="btn-tool">Exposición Personal</a>
                 </div>
             </div>
         </section>
 
     </main>
 
-    <footer class="section-padding" style="background: #000;">
+    <footer class="section-padding" style="background: #000; border-top: 1px solid var(--border);">
         <div class="container">
-            <p style="font-weight: 800; font-size: 1.2rem; color: var(--primary); letter-spacing: 2px;">DEFENSA DIGITAL</p>
-            <div style="margin-top: 2rem; display: flex; justify-content: center; gap: 2rem; font-size: 0.8rem; color: var(--text-dim);">
-                <span>Privacidad Protegida</span>
-                <span>Investigación OSINT 2026</span>
-                <span>Perú</span>
+            <p style="font-weight: 800; font-size: 1.2rem; color: var(--primary); letter-spacing: 3px;">DEFENSA DIGITAL</p>
+            <div style="margin-top: 2rem; display: flex; justify-content: center; gap: 3rem; font-size: 0.8rem; color: var(--text-dim); flex-wrap: wrap;">
+                <span>© 2026 Seguridad Peruana</span>
+                <span>Gobernanza ISO/IEC</span>
+                <span>Privacidad Blindada</span>
             </div>
         </div>
     </footer>
 
     <script>
-        // Terminal Typing Effect
-        const terminalBody = document.getElementById('terminal-body');
-        const lines = [
-            { text: "[OK] Protocolo de seguridad cargado.", color: "#0f0" },
-            { text: "[OK] Escaneo de IPs regionales activado.", color: "#0f0" },
-            { text: "[!] Alerta: Red Criminal identificada.", color: "#ff0" }
-        ];
-
-        let lineIdx = 0;
-        let charIdx = 0;
-
-        function typeWriter() {
-            if (lineIdx < lines.length) {
-                if (charIdx === 0) {
-                    const p = document.createElement('p');
-                    p.style.color = lines[lineIdx].color;
-                    p.style.marginBottom = '0.5rem';
-                    terminalBody.appendChild(p);
-                }
-
-                const currentLine = lines[lineIdx].text;
-                if (charIdx < currentLine.length) {
-                    terminalBody.lastChild.textContent += currentLine.charAt(charIdx);
-                    charIdx++;
-                    setTimeout(typeWriter, 40);
-                } else {
-                    lineIdx++;
-                    charIdx = 0;
-                    setTimeout(typeWriter, 500);
-                }
-            }
-        }
-
-        // Initialize Typing Effect
-        setTimeout(typeWriter, 1000);
-
-        // Matrix Rain Animation optimized for performance
+        // Matrix Rain Animation Optimized
         const canvas = document.getElementById('matrix-canvas');
         const ctx = canvas.getContext('2d');
 
-        let width = canvas.width = window.innerWidth;
-        let height = canvas.height = window.innerHeight;
+        let width, height, columns, drops;
+        const fontSize = 16;
+        const letters = "01010101ABCDEFGHIJKLMNOPQRSTUVWXYZ@#$";
 
-        const letters = "01010101ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-        const fontSize = 14;
-        let columns = width / fontSize;
-
-        let drops = [];
-        for (let i = 0; i < columns; i++) {
-            drops[i] = 1;
+        function setupCanvas() {
+            width = canvas.width = window.innerWidth;
+            height = canvas.height = window.innerHeight;
+            columns = Math.floor(width / fontSize);
+            drops = new Array(columns).fill(1);
         }
+
+        setupCanvas();
 
         function draw() {
             ctx.fillStyle = "rgba(0, 0, 0, 0.08)";
@@ -435,17 +462,46 @@
             }
         }
 
-        setInterval(draw, 40);
+        // Variable interval for mobile performance
+        const intervalTime = window.innerWidth < 768 ? 50 : 35;
+        setInterval(draw, intervalTime);
 
-        window.addEventListener('resize', () => {
-            width = canvas.width = window.innerWidth;
-            height = canvas.height = window.innerHeight;
-            columns = width / fontSize;
-            drops = [];
-            for (let i = 0; i < columns; i++) {
-                drops[i] = 1;
+        window.addEventListener('resize', setupCanvas);
+
+        // Terminal Typewriter Effect
+        const terminalBody = document.getElementById('terminal-body');
+        const terminalLines = [
+            { text: "[OK] Protocolo de seguridad cargado.", color: "#0f0" },
+            { text: "[OK] Escaneo de IPs regionales activado.", color: "#0f0" },
+            { text: "[!] Alerta: Red Criminal identificada.", color: "#ff0" }
+        ];
+
+        let lineIdx = 0;
+        let charIdx = 0;
+
+        function typeWriter() {
+            if (lineIdx < terminalLines.length) {
+                if (charIdx === 0) {
+                    const p = document.createElement('p');
+                    p.style.color = terminalLines[lineIdx].color;
+                    p.style.marginBottom = '0.4rem';
+                    terminalBody.appendChild(p);
+                }
+
+                const currentLine = terminalLines[lineIdx].text;
+                if (charIdx < currentLine.length) {
+                    terminalBody.lastChild.textContent += currentLine.charAt(charIdx);
+                    charIdx++;
+                    setTimeout(typeWriter, 35);
+                } else {
+                    lineIdx++;
+                    charIdx = 0;
+                    setTimeout(typeWriter, 500);
+                }
             }
-        });
+        }
+
+        setTimeout(typeWriter, 800);
     </script>
 </body>
 </html>
