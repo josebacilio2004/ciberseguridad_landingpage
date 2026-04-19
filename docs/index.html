@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Defensa Digital v2.0 | Inteligencia Forense</title>
-    <link rel="icon" type="image/png" href="favicon.png">
+    <title>Defensa Digital | Portal de Inteligencia de Ciberseguridad</title>
+    <link rel="icon" id="favicon-link" type="image/png" href="favicon-removebg-preview.png">
     
     <!-- Fonts & CDNs -->
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
@@ -18,62 +18,83 @@
 
     <canvas id="matrix-canvas"></canvas>
 
+    <!-- HERO ORIGINAL RESTAURADO -->
     <header class="hero">
-        <div class="container hero-content">
+        <div class="hero-content container">
             <div class="hero-text">
                 <div class="terminal">
-                    <div class="terminal-header">> INTEL-SYS VERSION 4.0.1 [V2.0-ENHANCED]</div>
-                    <div id="terminal-body"><!-- Typewriter Effect --></div>
+                    <div class="terminal-header">> INTEL-SYS VERSION 4.0.1 [RESTAURADO]</div>
+                    <div id="terminal-body">
+                        <!-- Texto cargado por JavaScript para efecto typewriter -->
+                    </div>
                 </div>
                 <h1 class="glitch-text" data-text="Defensa Digital">Defensa Digital</h1>
-                <p style="font-size: 1.2rem; color: var(--text-dim); margin-bottom: 2rem;">Plataforma de inteligencia forense y prevención activa. Versión 2.0 con motor de búsqueda y simulación de riesgos.</p>
-                <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
-                    <a href="#buscador" class="btn btn-primary">Buscador Forense</a>
-                    <a href="#entrenamiento" class="btn btn-accent">Simulador Cyber-Gym</a>
-                    <a href="#reporte" class="btn btn-primary" style="background: #fff; color: #000;">Generar Denuncia</a>
+                <p class="hero-sub">Manual integral de inteligencia para la detección y respuesta ante estafas de inversión y suplantación bancaria en el ecosistema digital peruano.</p>
+                <div class="tool-bar">
+                    <a href="#analisis" class="btn-tool">Análisis Técnico</a>
+                    <a href="#casos" class="btn-tool" style="border-color: var(--accent); color: var(--accent);">Red Criminal</a>
+                    <a href="#v2-tools" class="btn-tool" style="border-color: var(--secondary); color: var(--secondary);">Herramientas v2.0</a>
                 </div>
             </div>
-            <div style="text-align: right;">
-                <canvas id="intelChart" style="max-width: 400px; margin: 0 auto;"></canvas>
+            <div class="hero-image">
+                <img src="assets/criminal.png" alt="Ciberdelincuente" loading="eager">
             </div>
         </div>
     </header>
 
-    <main class="container">
-
-        <!-- Módulo 1: Buscador de Inteligencia -->
-        <section id="buscador" class="section-padding">
-            <h2 class="section-title">Investigación de Identidades</h2>
-            <p class="section-desc">Consulta nuestra base de datos local de sospechosos, cuentas mula e infraestructuras de fraude detectadas.</p>
-            <div class="search-container">
-                <input type="text" id="forensic-search" class="search-input" placeholder="Ingresa nombre, DNI o banco (Ej: Chimbote, BCP, Ydrogo)...">
-                <div id="search-results" class="search-results">
-                    <p style="color: var(--text-dim); text-align: center;">Resultados de inteligencia aparecerán aquí.</p>
+    <main>
+        <!-- SECCIÓN 1: ANATOMÍA (RESTAURADO) -->
+        <section id="analisis" class="section-padding container">
+            <h2 class="section-title">1. Anatomía del Ataque</h2>
+            <p class="section-desc">Entiende cómo los atacantes logran burlar tus defensas iniciales usando tecnología y psicología digital avanzada.</p>
+            <div class="card-grid">
+                <div class="card">
+                    <img src="assets/phishing.png" alt="Phishing Hook" loading="lazy">
+                    <h3>Vectores de Phishing</h3>
+                    <p>Los atacantes usan <strong>Dominios Homógrafos</strong> y redirecciones encadenadas para saltar filtros de correo y SMS. Los dominios tienen una vida útil menor a 7 días.</p>
+                </div>
+                <div class="card">
+                    <img src="assets/social.png" alt="Ingeniería Social" loading="lazy">
+                    <h3>Ingeniería Social</h3>
+                    <p>Se basan en el principio de <strong>Autoridad y Urgencia</strong>. Te contactan "asesores" con perfiles profesionales para generar una falsa cercanía y familiaridad.</p>
+                </div>
+                <div class="card">
+                    <img src="assets/balance.png" alt="Manipulación de Saldo" loading="lazy">
+                    <h3>Manipulación de Saldo</h3>
+                    <p>Las plataformas simulan un dashboard de ganancias. Ves números subir, pero es solo código visual sin respaldo financiero real. El dinero real ya fue desviado.</p>
                 </div>
             </div>
         </section>
 
-        <!-- Módulo 2: Simulador Interactivo -->
-        <section id="entrenamiento" class="section-padding">
-            <h2 class="section-title">Cyber-Gym: Simulador de Amenazas</h2>
-            <p class="section-desc">Entrena tus reflejos ante ataques de ingeniería social y fraude financiero en tiempo real.</p>
-            <div id="sim-content" class="sim-container">
-                <!-- Cargado por main.js -->
+        <!-- SECCIÓN 2: CUMPLIMIENTO (RESTAURADO) -->
+        <section id="compliance" class="container">
+            <div class="compliance">
+                <div style="display: flex; gap: 3rem; align-items: center; flex-wrap: wrap;">
+                    <div style="flex: 1; min-width: 280px;">
+                        <img src="assets/standards.png" alt="Shield Standards" loading="lazy" style="width: 100%; border-radius: 20px;">
+                    </div>
+                    <div style="flex: 1.5; min-width: 280px;">
+                        <h2 class="section-title" style="color: white;">Gobernanza y Estándares</h2>
+                        <p style="color: rgba(255,255,255,0.7); margin-bottom: 2rem;">Basado en las mejores prácticas de la industria global para la resiliencia digital.</p>
+                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem;">
+                            <div><strong style="color: var(--secondary);">ISO 27001</strong><p style="font-size: 0.8rem;">Control de activos y factor humano.</p></div>
+                            <div><strong style="color: var(--secondary);">COBIT 2019</strong><p style="font-size: 0.8rem;">Gobernanza de riesgos de TI.</p></div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </section>
 
-        <!-- Módulo 3: Anatomía y Red de Chimbote (Historial) -->
-        <section id="red" class="section-padding">
-            <div style="border-left: 4px solid var(--accent); padding-left: 1rem; margin-bottom: 2rem;">
-                <h2 style="font-size: 2rem;">Mapa de la Red Criminal</h2>
-                <p style="color: var(--text-dim);">Evidencia recolectada del caso 'S/ 1,099.00' (Abril 2026).</p>
-            </div>
+        <!-- SECCIÓN 3: CASOS CHIMBOTE (RESTAURADO) -->
+        <section id="casos" class="section-padding container">
+            <div class="case-header">Inteligencia de Campo: Red de Chimbote</div>
+            <h2 class="section-title">Mapa de Cuentas Mula</h2>
             <div class="table-container">
                 <table class="mule-table">
                     <thead>
                         <tr>
-                            <th>Identidad</th>
-                            <th>DNI</th>
+                            <th>Nombre Completo</th>
+                            <th>Identificador (DNI)</th>
                             <th>Entidad / Rol</th>
                         </tr>
                     </thead>
@@ -87,32 +108,54 @@
             </div>
         </section>
 
-        <!-- Módulo 4: Generador de Denuncia -->
-        <section id="reporte" class="section-padding">
-            <h2 class="section-title">Generador de Denuncia Formal</h2>
-            <p class="section-desc">Completa los campos para generar un reporte técnico profesional listo para ser presentado ante la PNP (Ley 30096).</p>
-            <div class="search-container" style="background: rgba(255,255,255,0.02);">
-                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1rem;">
-                    <div>
-                        <label style="display: block; font-size: 0.8rem; margin-bottom: 0.5rem;">Nombre del Afectado</label>
-                        <input type="text" id="rep-victima" class="search-input" placeholder="Tu nombre...">
+        <!-- ZONA DE INTELIGENCIA AVANZADA (v2.0 INTEGRADA) -->
+        <section id="v2-tools" class="intelligence-zone">
+            <div class="container">
+                <div style="text-align: center; margin-bottom: 4rem;">
+                    <span class="case-header" style="border-left: none; padding-left: 0; display: block; margin-bottom: 1rem;">MÓDULO DE EXPERTO V2.0</span>
+                    <h2 class="section-title">Herramientas de Inteligencia Avanzada</h2>
+                    <p class="section-desc" style="margin: 0 auto;">Explora el buscador forense, entrena en el simulador o genera reportes oficiales.</p>
+                </div>
+
+                <div class="card-grid" style="grid-template-columns: 1.5fr 1fr; align-items: start;">
+                    <!-- Buscador -->
+                    <div class="search-container" style="background: rgba(0,0,0,0.5);">
+                        <h3>Buscador de Identidades</h3>
+                        <p style="font-size: 0.9rem; color: var(--text-dim); margin-bottom: 1.5rem;">Consulta en tiempo real nuestra base de datos de sospechosos.</p>
+                        <input type="text" id="forensic-search" class="search-input" placeholder="Ingresa nombre, DNI o banco...">
+                        <div id="search-results" class="search-results">
+                            <p style="color: var(--text-dim); text-align: center;">Resultados de inteligencia aparecerán aquí.</p>
+                        </div>
                     </div>
-                    <div>
-                        <label style="display: block; font-size: 0.8rem; margin-bottom: 0.5rem;">Monto Perdido (Soles)</label>
-                        <input type="number" id="rep-monto" class="search-input" placeholder="Ej: 1099.00">
-                    </div>
-                    <div>
-                        <label style="display: block; font-size: 0.8rem; margin-bottom: 0.5rem;">Fecha del Incidente</label>
-                        <input type="date" id="rep-fecha" class="search-input">
-                    </div>
-                    <div>
-                        <label style="display: block; font-size: 0.8rem; margin-bottom: 0.5rem;">Sospechoso / Cuenta Mula</label>
-                        <input type="text" id="rep-sospechoso" class="search-input" placeholder="Nombre completo...">
+                    
+                    <!-- Stats Chart -->
+                    <div class="card" style="background: rgba(0,0,0,0.5); border-color: var(--primary);">
+                        <h3>Estadísticas de Riesgo</h3>
+                        <canvas id="intelChart" style="max-width: 100%; margin-top: 1.5rem;"></canvas>
                     </div>
                 </div>
-                <label style="display: block; font-size: 0.8rem; margin-bottom: 0.5rem; margin-top: 1rem;">Descripción Técnica del Suceso</label>
-                <textarea id="rep-desc" class="search-input" style="height: 120px;" placeholder="Detalla cómo ocurrió el ataque..."></textarea>
-                <button class="btn btn-accent" style="width: 100%; margin-top: 1rem;" onclick="downloadDenunciaPDF()">DESCARGAR REPORTE FORMAL (PDF)</button>
+
+                <div class="card-grid" style="margin-top: 2rem;">
+                    <!-- Simulador -->
+                    <div class="sim-container" style="background: rgba(15, 15, 18, 0.8);">
+                        <h3 style="margin-bottom: 1.5rem; color: var(--secondary);">Cyber-Gym: Simulador de Amenazas</h3>
+                        <div id="sim-content">
+                            <!-- JS loaded -->
+                        </div>
+                    </div>
+
+                    <!-- Report Builder -->
+                    <div class="search-container" style="background: rgba(15, 15, 18, 0.8); border-color: var(--accent);">
+                        <h3 style="color: var(--accent); margin-bottom: 1rem;">Generador de Denuncia Formal</h3>
+                        <div style="display: grid; gap: 1rem;">
+                            <input type="text" id="rep-victima" class="search-input" placeholder="Tu nombre...">
+                            <input type="number" id="rep-monto" class="search-input" placeholder="Monto comprometido (Soles)...">
+                            <input type="text" id="rep-sospechoso" class="search-input" placeholder="Nombre completo del sospechoso...">
+                            <textarea id="rep-desc" class="search-input" style="height: 100px;" placeholder="Detalles técnicos..."></textarea>
+                            <button class="btn btn-accent" style="width: 100%; border: none; cursor: pointer;" onclick="downloadDenunciaPDF()">DESCARGAR REPORTE (PDF)</button>
+                        </div>
+                    </div>
+                </div>
             </div>
         </section>
 
@@ -121,7 +164,11 @@
     <footer class="section-padding" style="background: #000; border-top: 1px solid var(--border); text-align: center;">
         <div class="container">
             <p style="font-weight: 800; font-size: 1.2rem; color: var(--primary); letter-spacing: 3px;">DEFENSA DIGITAL 2.0</p>
-            <p style="margin-top: 1rem; color: var(--text-dim); font-size: 0.8rem;">Gobernanza ISO 27001 | COBIT 2019 | NIST CSF</p>
+            <div style="margin-top: 2rem; display: flex; justify-content: center; gap: 2rem; font-size: 0.8rem; color: var(--text-dim); flex-wrap: wrap;">
+                <span>urlscan.io</span>
+                <span>VirusTotal</span>
+                <span>AbuseIPDB</span>
+            </div>
         </div>
     </footer>
 
