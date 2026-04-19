@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Defensa Digital | Portal de Inteligencia de Ciberseguridad</title>
-    <link rel="icon" type="image/png" href="favicon.png">
+    <link rel="icon" id="favicon-link" type="image/png" href="favicon-removebg-preview.png">
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
     <style>
         :root {
@@ -502,6 +502,49 @@
         }
 
         setTimeout(typeWriter, 800);
+
+        // Favicon Animation (Glow Pulse)
+        function initFaviconAnimation() {
+            const favicon = document.getElementById('favicon-link');
+            const canvas = document.createElement('canvas');
+            canvas.width = 64;
+            canvas.height = 64;
+            const ctx = canvas.getContext('2d');
+            const img = new Image();
+            img.src = 'favicon-removebg-preview.png';
+
+            img.onload = () => {
+                let alpha = 0;
+                let increasing = true;
+
+                function pulse() {
+                    ctx.clearRect(0, 0, 64, 64);
+                    
+                    // Draw glow
+                    ctx.globalAlpha = Math.sin(Date.now() / 500) * 0.5 + 0.5;
+                    ctx.shadowBlur = 15;
+                    ctx.shadowColor = '#3b82f6';
+                    
+                    // Draw base icon
+                    ctx.globalAlpha = 1;
+                    ctx.drawImage(img, 0, 0, 64, 64);
+                    
+                    favicon.href = canvas.toDataURL('image/png');
+                    requestAnimationFrame(pulse);
+                }
+                // Only animate every 100ms to save CPU
+                setInterval(() => {
+                    ctx.clearRect(0, 0, 64, 64);
+                    const glowValue = Math.sin(Date.now() / 1000) * 5 + 10;
+                    ctx.shadowBlur = glowValue;
+                    ctx.shadowColor = '#3b82f6';
+                    ctx.drawImage(img, 0, 0, 64, 64);
+                    favicon.href = canvas.toDataURL('image/png');
+                }, 150);
+            };
+        }
+
+        setTimeout(initFaviconAnimation, 2000);
     </script>
 </body>
 </html>
